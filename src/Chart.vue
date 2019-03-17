@@ -4,7 +4,7 @@
     <div class="chart-container">
       <span class="chart-label">Waga</span>
       <span class="chart-info">({{parseFloat(lostWeight).toFixed(1)}}kg)</span>
-      <span class="chart-day">Day {{testWeight.length}}</span>
+      <span class="chart-day">Dzień {{testWeight.length}}</span>
       <canvas id="my-chart-1"></canvas>
     </div>
     <!-- wykres pas -->
@@ -249,7 +249,9 @@ export default {
       return 100 / ((this.testEmot1 + this.testEmot2) / this.testEmot1);
     },
     testScoreEmot() {
-      if (this.testScore >= 70) {
+      if (this.testScore >= 85) {
+        return "😝🔥💪";
+      } else if (this.testScore < 85 && this.testScore >= 70) {
         return "😋";
       } else if (this.testScore < 70 && this.testScore >= 40) {
         return "😐";
@@ -283,15 +285,15 @@ export default {
   position: relative;
   width: 98%;
   margin: 0 auto;
-  padding: 7px 0 7px 0;
+  padding: 7px 0 0px 0;
 }
 
 .chart-container {
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
 }
 
 .chart-label {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   color: black;
   padding: 0px 0px 0px 15px;
@@ -299,13 +301,14 @@ export default {
 }
 
 .chart-info {
-  font-weight: 100;
+  font-weight: 400;
   color: #000;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .chart-day {
-  font-size: 18px;
+  font-size: 15px;
+  margin-top: 4px;
   font-weight: bold;
   float: right;
   padding-top: 5px;
@@ -335,6 +338,6 @@ export default {
 }
 
 .chart-emot {
-  font-size: 18px;
+  font-size: 16px;
 }
 </style>

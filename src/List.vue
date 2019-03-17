@@ -1,10 +1,20 @@
 <template>
   <div id="list">
     <div class="label-bar">
-      <span class="label-bar__label date">📆</span>
-      <span class="label-bar__label weight">✏️kg</span>
-      <span class="label-bar__label emot">😄</span>
-      <span class="label-bar__label note">✏️cm</span>
+      <div class="label-bar__label date">📆</div>
+      <div class="label-bar__label weight">✏️ kg</div>
+      <div class="label-bar__label emot">😄</div>
+      <div class="label-bar__label note">✏️ cm</div>
+      <!-- <div class="label-bar__label date">
+        <img src="./img/calendar (2).png" alt class="label__img">
+      </div>
+      <div class="label-bar__label weight">
+        <img src="./img/pencil.png" alt class="label__img">
+      </div>
+      <div class="label-bar__label emot">😄✏️</div>
+      <div class="label-bar__label note">
+        <img src="./img/write-letter.png" alt class="label__img">
+      </div>-->
     </div>
 
     <ul class="data">
@@ -15,38 +25,51 @@
         <span class="data__item__col note">{{data.note}}</span>
       </li>
     </ul>
-    <div v-if="show" class="input-box">
-      <h2 class="input-box__title">Waga</h2>
+    <transition name="v">
+      <div v-if="show" class="input-box">
+        <h2 class="input-box__title">Dzień {{index + 1}}</h2>
+        <form id="my-form">
+          <div class="input-box__item">
+            <label class="input-box__label" for>Data:</label>
+            <input class="input-box__input" type="text" :placeholder="currentDate" v-model="date">
+          </div>
+          <div class="input-box__item">
+            <label class="input-box__label" for>Waga:</label>
+            <input class="input-box__input" type="number" placeholder="-" v-model="weight">
+          </div>
 
-      <form id="my-form">
-        <div class="input-box__item">
-          <label class="input-box__label" for>Data:</label>
-          <input class="input-box__input" type="text" :placeholder="currentDate" v-model="date">
-        </div>
-        <div class="input-box__item">
-          <label class="input-box__label" for>Waga:</label>
-          <input class="input-box__input" type="text" placeholder="-" v-model="weight">
-        </div>
+          <div class="input-box__item">
+            <label class="input-box__label" for>Pas:</label>
+            <input class="input-box__input" type="number" placeholder="-" v-model="note">
+          </div>
+          <div class="input-box__item">
+            <select name class="input-box__select" v-model="emot">
+              <option value="-">-</option>
+              <option value="😊">😊</option>
+              <option value="😡">😡</option>
+            </select>
+            <!-- <div class="input-box__emot-container">
+              <div
+                class="input-box__emot"
+                v-bind:class="{'input-box__emot--selected': happyEmotSelect}"
+                v-on:click="happyEmotSelect = true"
+              >😊</div>
+              <div
+                class="input-box__emot"
+                v-bind:class="{'input-box__emot--selected': !happyEmotSelect}"
+                v-on:click="happyEmotSelect = false"
+              >😡</div>
+            </div>-->
+          </div>
 
-        <div class="input-box__item">
-          <label class="input-box__label" for>Pas:</label>
-          <input class="input-box__input" type="text" placeholder="-" v-model="note">
+          <div class="clearfix"></div>
+        </form>
+        <div class="input-box__buttons">
+          <button class="input-box__btn" v-on:click="showToggle(); clearData()">anuluj</button>
+          <button class="input-box__btn" v-on:click="addData()">ok</button>
         </div>
-        <div class="input-box__item">
-          <select name class="input-box__select" v-model="emot">
-            <option value="😊" selected>😊</option>
-            <option value="😡">😡</option>
-          </select>
-        </div>
-
-        <div class="clearfix"></div>
-      </form>
-      <div class="input-box__buttons">
-        <button class="input-box__btn" v-on:click="showToggle(); clearData()">anuluj</button>
-        <button class="input-box__btn" v-on:click="addData()">ok</button>
       </div>
-    </div>
-
+    </transition>
     <transition name="v">
       <div v-if="show" class="blackout"></div>
     </transition>
@@ -69,12 +92,14 @@ export default {
       emot: "",
       note: "",
       index: null,
-      storageData: null
+      storageData: null,
+      happyEmotSelect: true
     };
   },
   methods: {
     showToggle() {
       this.show = !this.show;
+      this.index = this.dataArr.length;
     },
     addData() {
       if (this.date === "") {
@@ -100,7 +125,6 @@ export default {
           emot: this.emot,
           note: this.note
         });
-        this.index = this.dataArr.length;
         this.listAnimation();
       } else {
         this.dataArr[this.index].date = this.date;
@@ -108,8 +132,8 @@ export default {
         this.dataArr[this.index].emot = this.emot;
         this.dataArr[this.index].note = this.note;
       }
-      this.show = !this.show;
       this.index = this.dataArr.length;
+      this.show = !this.show;
       this.clearData();
       document.getElementById("my-form").reset();
       // LOCAL STORAGE test
@@ -147,7 +171,7 @@ export default {
       setTimeout(function() {
         list.style.transition = "0.2s";
         list.style.transform = "translateY(0px)";
-      }, 10);
+      }, 75);
     },
     labelShadow() {
       const dataList = document.querySelector(".data");
@@ -156,7 +180,7 @@ export default {
         if (dataList.scrollTop > 0) {
           labelBar.style.borderBottom = "0px";
         } else {
-          labelBar.style.borderBottom = "1px solid rgb(0,0,0,0.05";
+          labelBar.style.borderBottom = "1px solid rgb(0,0,0,0.03)";
         }
       });
     },
@@ -219,33 +243,45 @@ export default {
 }
 
 .label-bar {
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
   z-index: 2;
-  height: 50px;
-  line-height: 50px;
+  line-height: 48px;
 }
 
 .data__item {
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 50px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 48px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
   cursor: pointer;
 }
 
+.data__item:last-child {
+  padding-bottom: 95px;
+}
+
 .label-bar__label {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   color: black;
+  position: relative;
   /* border-right: 1px solid rgb(0, 0, 0, 0.05); */
 }
 
+.label__img {
+  width: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .data__item .emot {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .data {
-  height: calc(100vh - 240px);
+  height: calc(100vh - 150px);
   overflow-y: scroll;
   z-index: 1;
 }
@@ -253,6 +289,7 @@ export default {
 .emot {
   width: 50px;
   flex-shrink: 0;
+  font-size: 16px;
 }
 
 .note,
@@ -278,7 +315,7 @@ export default {
 .input-btn {
   position: absolute;
   left: 50%;
-  bottom: 18px;
+  bottom: 22px;
   transform: translateX(-50%);
   z-index: 3;
   width: 60px;
@@ -291,25 +328,13 @@ export default {
   font-weight: 400;
   color: #fff;
   cursor: pointer;
-  box-shadow: 0px 3px 16px 2px rgb(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 16px 2px rgba(0, 0, 0, 0.2);
 }
 
 .input-btn img {
   width: 55%;
   position: relative;
   top: 12px;
-}
-
-.blackout {
-  position: absolute;
-  background: red;
-  top: 0;
-  width: 100%;
-  height: 150%;
-  transition: 0.2s;
-  transform: translateY(-20%);
-  background: rgb(0, 0, 0, 0.3);
-  z-index: 4;
 }
 
 .input-box {
@@ -327,16 +352,15 @@ export default {
 
 .input-box__title {
   color: black;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  line-height: 30px;
+  line-height: 28px;
   padding: 14px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
 }
 
 .input-box form {
   padding: 24px 24px 24px 24px;
-  background: #fff;
 }
 
 .input-box__item {
@@ -348,7 +372,7 @@ export default {
   float: right;
   width: 140px;
   border: 1px solid rgb(0, 0, 0, 0.2);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 36px;
   border-radius: 2px;
   text-align: center;
@@ -359,9 +383,12 @@ export default {
   border: 1px solid rgb(0, 0, 0, 0.2);
   font-size: 22px;
   height: 48px;
+  /* width: 48px; */
   display: block;
   line-height: 22px;
   border-radius: 2px;
+  text-align: center;
+  /* -webkit-appearance: button; */
 }
 
 .input-box__label {
@@ -392,4 +419,24 @@ export default {
 .clearfix {
   clear: both;
 }
+/* 
+.input-box__emot-container {
+  padding-top: 15px;
+  width: 100%;
+  display: flex;
+}
+
+.input-box__emot {
+  width: 100%;
+  text-align: center;
+  margin: 0 20px;
+  font-size: 24px;
+  padding: 4px;
+  border: 1px solid rgb(0, 0, 0, 0);
+}
+
+.input-box__emot--selected {
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 2px;
+} */
 </style>

@@ -14,24 +14,26 @@
         </ul>
       </li>
     </ul>
-
-    <div v-if="show" class="input-box">
-      <h2 class="input-box__title">Menu ({{days[dayIndex]}})</h2>
-      <form id="my-form">
-        <div class="input-box__item" v-for="(mealInput, mealInputsIndex) in mealInputs">
-          <input
-            class="input-box__input"
-            type="text"
-            v-model="mealInputs[mealInputsIndex]"
-            :placeholder="'posiłek ' + (mealInputsIndex + 1)"
-          >
+    <transition name="v">
+      <div v-if="show" class="input-box">
+        <h2 class="input-box__title">Menu - {{days[dayIndex]}}</h2>
+        <span></span>
+        <form id="my-form">
+          <div class="input-box__item" v-for="(mealInput, mealInputsIndex) in mealInputs">
+            <input
+              class="input-box__input"
+              type="text"
+              v-model="mealInputs[mealInputsIndex]"
+              :placeholder="'posiłek ' + (mealInputsIndex + 1)"
+            >
+          </div>
+        </form>
+        <div class="input-box__buttons">
+          <button class="input-box__btn" v-on:click="inputShowToggle">anuluj</button>
+          <button class="input-box__btn" v-on:click="addMeals">ok</button>
         </div>
-      </form>
-      <div class="input-box__buttons">
-        <button class="input-box__btn" v-on:click="inputShowToggle">anuluj</button>
-        <button class="input-box__btn" v-on:click="addMeals">ok</button>
       </div>
-    </div>
+    </transition>
     <transition name="v">
       <div v-if="show" class="blackout"></div>
     </transition>
@@ -45,13 +47,13 @@ export default {
       closed: true,
       show: false,
       days: [
-        "Poniedziałek",
-        "Wtorek",
-        "Środa",
-        "Czwartek",
-        "Piątek",
-        "Sobota",
-        "Niedziela"
+        "poniedziałek",
+        "wtorek",
+        "środa",
+        "czwartek",
+        "piątek",
+        "sobota",
+        "niedziela"
       ],
       activeDay: 0,
       dayIndex: 0,
@@ -136,8 +138,8 @@ export default {
 }
 
 .day {
-  padding: 12px 0;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
   list-style: none;
   transition: 0.2s;
   height: 40px;
@@ -146,9 +148,10 @@ export default {
 
 .day__label {
   display: block;
-  font-size: 16px;
+  font-size: 15px;
   padding-left: 15px;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .day__dots {
@@ -156,12 +159,12 @@ export default {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 18px;
+  font-size: 15px;
   transition: 0.1s;
 }
 
 .day--opened {
-  height: 180px;
+  height: 165px;
   /* background: #fffbe5; */
 }
 
@@ -187,21 +190,9 @@ export default {
 
 .meals__item {
   list-style: none;
-  font-size: 16px;
+  font-size: 15px;
   text-align: left;
-  padding: 6px 0;
-}
-
-.blackout {
-  position: absolute;
-  background: red;
-  top: 0;
-  width: 100%;
-  height: 150%;
-  transition: 0.2s;
-  transform: translateY(-20%);
-  background: rgb(0, 0, 0, 0.3);
-  z-index: 4;
+  padding: 5px 0;
 }
 
 .input-box {
@@ -211,7 +202,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -60%);
-  box-shadow: 0px 6px 20px rgb(0, 0, 0, 0.3);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
   z-index: 5;
   border-radius: 3px;
   overflow: hidden;
@@ -219,17 +210,17 @@ export default {
 
 .input-box__title {
   color: black;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  line-height: 30px;
+  line-height: 28px;
   padding: 14px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
   /* background: #ededed; */
 }
 
 .input-box form {
-  background: #fff;
   padding: 24px 0 14px 0;
+  height: 200px;
 }
 
 .input-box__item {
@@ -239,15 +230,14 @@ export default {
 
 .input-box__input {
   width: calc(100% - 50px);
-  margin: 0 auto;
   border: 1px solid rgb(0, 0, 0, 0.2);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 36px;
   border-radius: 2px;
   text-align: left;
   padding: 0 10px;
-  margin: 0px 150px 0 15px;
-  color: gray;
+  margin-left: 15px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .input-box__input:focus {
@@ -255,7 +245,7 @@ export default {
 }
 
 .input-box__label {
-  font-size: 20px;
+  font-size: 15px;
   line-height: 36px;
   padding-left: 25px;
 }

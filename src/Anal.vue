@@ -121,8 +121,8 @@ export default {
 
 <style scoped>
 * {
-  line-height: 26px;
-  font-size: 16px;
+  line-height: 23px;
+  font-size: 15px;
 }
 
 #anal {
@@ -136,8 +136,7 @@ export default {
 .info__item {
   width: 100%;
   padding: 12px 0;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
-  /* border-right: 1px solid rgb(0, 0, 0, 0.05); */
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
 }
 
 .info__label,
@@ -149,13 +148,13 @@ export default {
 
 .info__span {
   color: black;
-  font-size: 18px;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .calculator__item {
   padding: 12px 0;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
 }
 
 .calculator__label,
@@ -166,22 +165,20 @@ export default {
 }
 
 .calculator__label {
-  font-size: 16px;
 }
 
 .calculator__span {
   color: #d81159;
-  font-size: 18px;
   padding-top: 0px;
+  font-weight: bold;
 }
 
 .gray-span {
   color: black;
-  font-weight: 100;
-  font-size: 16px;
+  font-weight: 400;
 }
 
 .emot-span {
-  font-size: 18px;
+  font-size: 16px;
 }
 </style>

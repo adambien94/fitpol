@@ -1,5 +1,5 @@
 <template>
-  <div id="menu">
+  <div id="menu" v-touch:swipe.left="slideHam">
     <ul class="menu__list">
       <li class="menu__item">
         <img src="./img/baseline_search_black_24dp.png" class="menu__item__img">
@@ -7,7 +7,7 @@
       </li>
       <li class="menu__item">
         <img src="./img/sharp_accessibility_black_24dp.png" class="menu__item__img">
-        <a href="#" class="menu__link">Personalizuj</a>
+        <a href="#" class="menu__link" v-on:click="slideHam2">Personalizuj</a>
       </li>
       <li class="menu__item">
         <img src="./img/sharp_fitness_center_black_18dp.png" class="menu__item__img">
@@ -18,13 +18,7 @@
         <a href="#" class="menu__link">Witka stary</a>
       </li>
     </ul>
-    <h2 class="personal__title">Personal Info</h2>
-    <input class="personal__input" type="text" name id v-model="age" placeholder="wiek">
-    <input class="personal__input" type="text" name id v-model="height" placeholder="wzrost">
-    <input class="personal__input" type="text" name id v-model="sex" placeholder="płeć M/K">
-    
-    <button v-on:click="setData" class="personal__set-btn">Ustaw</button>
-    <button v-on:click="resetData" class="reset-btn">reset</button>
+    <button v-on:click="resetData()" class="reset-btn">reset</button>
   </div>
 </template>
 
@@ -37,64 +31,28 @@ export default {
       height: null,
       sex: "",
       age: null
+      // show: false
     };
   },
   methods: {
-    storeAge() {
-      if (isNaN(this.age)) {
-        alert("błędne dane");
-      } else if (this.age === null) {
-        console.log("hahaha");
-      } else {
-        this.$store.commit("storeAge", this.age);
-      }
-    },
-    storeHeight() {
-      if (isNaN(this.height)) {
-        alert("błędne dane");
-      } else if (this.age === null) {
-        console.log("hahaha");
-      } else {
-        this.$store.commit("storeHeight", this.height);
-      }
-    },
-    storeSex() {
-      if (!isNaN(this.sex)) {
-        alert("błędne danee");
-      } else if (this.sex === null) {
-        console.log("hahaha");
-      } else {
-        this.$store.commit("storeSex", this.sex);
-      }
-    },
-    setData() {
-      this.storeAge();
-      this.storeHeight();
-      this.storeSex();
-      localStorage.setItem("mojeInfo", JSON.stringify(this.personalInfo));
-    },
     resetData() {
       this.$store.commit("resetData");
-      console.log(this.dataArr);
+      this.$store.commit("resetInfo");
     },
-    updateInfo() {
-      this.$store.commit("updateInfo");
+    slideHam2() {
+      this.$emit("slideHam2");
+    },
+    slideHam() {
+      console.log("hehe");
+      this.$emit("slideHam");
     }
-  },
-  computed: {
-    personalInfo() {
-      return this.$store.state.personalInfo;
-    }
-  },
-  created() {
-    this.updateInfo();
   }
 };
 </script>
 
 <style scoped>
 #menu {
-  background: #fff;
+  /* background: #fff; */
   width: 100%;
   height: 100%;
   z-index: 10;
@@ -121,45 +79,10 @@ export default {
 }
 
 .menu__link {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: bold;
   color: #000;
   text-decoration: none;
-}
-
-.personal__input {
-  width: calc(70% - 38px);
-  border: 1px solid rgb(0, 0, 0, 0.2);
-  font-size: 18px;
-  line-height: 36px;
-  border-radius: 2px;
-  text-align: left;
-  margin: 15px 15px 0px 15px;
-  padding-left: 5px;
-}
-
-.personal__set-btn {
-  background: #388697;
-  color: white;
-  text-transform: capitalize;
-  width: calc(70% - 30px);
-  height: 40px;
-  margin: 3px;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 15px;
-}
-
-.personal__title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  margin: 15px 15px 0px 15px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.05);
-  padding-bottom: 15px;
 }
 
 .reset-btn {

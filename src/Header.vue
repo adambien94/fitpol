@@ -31,13 +31,13 @@ export default {
   methods: {
     slideCarousel(indexOfOption) {
       const activeBorder = document.querySelector(".active-border");
-      setTimeout(function() {
+      setTimeout(() => {
         activeBorder.style.transform =
           "translateX(" +
           indexOfOption * activeBorder.getBoundingClientRect().width +
           "px)";
-      }, 75);
-      this.$emit("slideCarousel", indexOfOption); // $event, $emit - wywołanie funkcji w innym komponencie ("testFun"-nazwa funckji, "asdasd" - drugi parametr jako argument tej funckji)
+      }, 0);
+      this.$emit("slideCarousel", indexOfOption);
     },
     slideHam() {
       this.$emit("slideHam");
@@ -52,21 +52,23 @@ export default {
 .main-nav {
   position: fixed;
   z-index: 0;
+  max-width: 500px;
   width: 100%;
+  /* box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.2); */
 }
 .menu {
   position: relative;
 }
 
 .top-nav {
-  padding: 12px 15px 8px 15px;
+  padding: 10px 15px 6px 15px;
   background: #ededed;
   color: black;
   display: flex;
 }
 
 .top-nav__title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   line-height: 32px;
   margin-left: 15px;
@@ -77,10 +79,11 @@ export default {
 .top-nav__search,
 .top-nav__options {
   background: gray;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   flex-shrink: 0;
+  padding-top: 2px;
 }
 
 .top-nav__ham {
@@ -89,12 +92,12 @@ export default {
 }
 
 .top-nav__search {
-  background: url("./img/baseline_more_vert_black_24dp.png");
+  background: url("./img/baseline_search_black_24dp.png");
   background-size: cover;
 }
 
 .top-nav__options {
-  background: url("./img/baseline_search_black_24dp.png");
+  background: url("./img/baseline_more_vert_black_24dp.png");
   background-size: cover;
   margin-left: 10px;
 }
@@ -105,7 +108,7 @@ export default {
 }
 
 .bottom-nav__item {
-  font-size: 18px;
+  font-size: 17px;
   list-style: none;
   flex: 1;
   text-align: center;
@@ -117,23 +120,24 @@ export default {
   color: black;
   text-transform: capitalize;
   display: inline-block;
-  line-height: 52px;
+  line-height: 48px;
   width: 100%;
   box-sizing: border-box;
   position: relative;
+  transition: 0.2s;
 }
 
 .bottom-nav__link:focus {
-  color: #000;
+  color: black;
 }
 
 .active-border {
   position: absolute;
-  height: 50px;
+  height: 48px;
   width: 25%;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   z-index: 8;
   bottom: 0px;
-  transition: 0.2s;
+  transition: 0.225s;
 }
 </style>
