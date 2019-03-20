@@ -36,14 +36,14 @@
         </span>
       </div>
       <div class="calculator__item">
-        <span class="calculator__label">JP (na procent)</span>
+        <span class="calculator__label">Test (na procent)</span>
         <span class="calculator__span">87%</span>
       </div>
       <div class="calculator__item">
-        <span class="calculator__label">Witka stary z psem</span>
+        <span class="calculator__label">Lorem ipsum (coś tu będzie)</span>
         <span class="calculator__span">
           3021
-          <span class="gray-span">japa dziadu</span>
+          <span class="gray-span">wynik</span>
         </span>
       </div>
     </div>
