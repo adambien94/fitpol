@@ -1,5 +1,5 @@
 <template>
-  <div id="anal">
+  <div id="analysis">
     <div class="info">
       <div class="info__item">
         <span class="info__label">Wzrost</span>
@@ -125,7 +125,7 @@ export default {
   font-size: 15px;
 }
 
-#anal {
+#analysis {
   flex: 1;
 }
 .info {

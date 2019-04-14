@@ -2,7 +2,7 @@
 // import Header from "./Header.vue";
 import List from "./List.vue";
 import Chart from "./Chart.vue";
-import Anal from "./Anal.vue";
+import Analysis from "./Analysis.vue";
 import Personal from "./Personal.vue";
 
 export default [
@@ -21,8 +21,8 @@ export default [
     props: true
   },
   {
-    path: "/anal",
-    component: Anal,
+    path: "/analysis",
+    component: Analysis,
     props: true
   }
   // {

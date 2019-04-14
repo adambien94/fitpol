@@ -19,7 +19,7 @@
       v-touch:swipe.right="swipeContainerRight"
     >
       <app-list></app-list>
-      <app-anal></app-anal>
+      <app-analysis></app-analysis>
       <app-chart></app-chart>
       <app-stats></app-stats>
       <transition name="v">
@@ -36,7 +36,7 @@
 import Header from "./Header.vue";
 import List from "./List.vue";
 import Chart from "./Chart.vue";
-import Anal from "./Anal.vue";
+import Analysis from "./Analysis.vue";
 import Stats from "./Stats.vue";
 import Menu from "./Menu.vue";
 import Personal from "./Personal.vue";
@@ -47,7 +47,7 @@ export default {
     "app-header": Header,
     "app-list": List,
     "app-chart": Chart,
-    "app-anal": Anal,
+    "app-analysis": Analysis,
     "app-stats": Stats,
     "app-menu": Menu,
     "app-personal": Personal
