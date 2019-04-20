@@ -5,16 +5,6 @@
       <div class="label-bar__label weight">✏️ kg</div>
       <div class="label-bar__label emot">😄</div>
       <div class="label-bar__label note">✏️ cm</div>
-      <!-- <div class="label-bar__label date">
-        <img src="./img/calendar (2).png" alt class="label__img">
-      </div>
-      <div class="label-bar__label weight">
-        <img src="./img/pencil.png" alt class="label__img">
-      </div>
-      <div class="label-bar__label emot">😄✏️</div>
-      <div class="label-bar__label note">
-        <img src="./img/write-letter.png" alt class="label__img">
-      </div>-->
     </div>
 
     <ul class="data">
@@ -48,18 +38,6 @@
               <option value="😊">😊</option>
               <option value="😡">😡</option>
             </select>
-            <!-- <div class="input-box__emot-container">
-              <div
-                class="input-box__emot"
-                v-bind:class="{'input-box__emot--selected': happyEmotSelect}"
-                v-on:click="happyEmotSelect = true"
-              >😊</div>
-              <div
-                class="input-box__emot"
-                v-bind:class="{'input-box__emot--selected': !happyEmotSelect}"
-                v-on:click="happyEmotSelect = false"
-              >😡</div>
-            </div>-->
           </div>
 
           <div class="clearfix"></div>

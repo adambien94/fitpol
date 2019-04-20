@@ -137,27 +137,7 @@ export default {
         }
       });
     },
-    // updateData: function() {
-    //   for (let i = 0; i < this.$store.state.dataArr.length; i++) {
-    //     if (this.dataArr[i].weight === "-") {
-    //       this.weight.push(this.weight[i - 1]); // WYMYŚŁ COŚ TUTAJ !!!!!!!!!!!!!!!!!!!
-    //     } else {
-    //       this.weight.push(this.$store.state.dataArr[i].weight);
-    //     }
-    //     if (this.dataArr[i].note === "-") {
-    //       this.waist.push(this.waist[i - 1]);
-    //     } else {
-    //       this.waist.push(this.$store.state.dataArr[i].note);
-    //     }
-    //     if (this.$store.state.dataArr[i].emot === "😊") {
-    //       this.emot1++;
-    //       this.emots.push("happy");
-    //     } else if (this.$store.state.dataArr[i].emot === "😡") {
-    //       this.emot2++;
-    //       this.emots.push("sad");
-    //     }
-    //   }
-    // },
+
     updateDays() {
       for (let i = 0; i < this.period; i++) {
         this.weightGoal.push(this.goal);
