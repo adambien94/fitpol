@@ -12,12 +12,12 @@
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Wzrost:</label>
-          <input class="input-box__input" type="number" placeholder="-" v-model="height">
+          <input class="input-box__input" type="number" placeholder="[cm]" v-model="height">
         </div>
 
         <div class="input-box__item">
           <label class="input-box__label" for>Płeć:</label>
-          <input class="input-box__input" type="text" placeholder="-" v-model="sex">
+          <input class="input-box__input" type="text" placeholder="M/K" v-model="sex">
         </div>
         <div class="clearfix"></div>
       </form>
@@ -93,13 +93,14 @@ export default {
 
 <style scoped>
 #personal {
-  height: 260px;
+  background: #fff;
+  height: 100vh;
   width: 100%;
+  z-index: 555;
+  position: absolute;
 }
 
 .input-box {
-  width: 300px;
-  background: #fff;
   width: 100%;
   z-index: 5;
   border-radius: 3px;
@@ -116,7 +117,7 @@ export default {
 }
 
 .input-box form {
-  padding: 15px;
+  padding: 20px 30px;
 }
 
 .input-box__item {
@@ -126,7 +127,7 @@ export default {
 
 .input-box__input {
   float: right;
-  width: 140px;
+  width: 155px;
   border: 1px solid rgb(0, 0, 0, 0.2);
   font-size: 17px;
   line-height: 36px;
@@ -154,7 +155,7 @@ export default {
   background: #388697;
   color: white;
   text-transform: capitalize;
-  width: 142px;
+  width: 157px;
   height: 40px;
   border: none;
   outline: none;
@@ -162,7 +163,7 @@ export default {
   font-size: 18px;
   font-weight: bold;
   float: right;
-  margin: 0 15px;
+  margin: 0 30px;
 }
 
 .clearfix {
@@ -170,8 +171,7 @@ export default {
 }
 
 .grey {
-  /* background: #ededed; */
-  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
+  background: #ededed;
   height: 50px;
   margin-bottom: 10px;
 }

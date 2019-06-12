@@ -130,13 +130,16 @@ export default {
 }
 .info {
   display: flex;
-  font-weight: bold;
 }
 
 .info__item {
   width: 100%;
   padding: 12px 0;
   border-bottom: 1px solid rgb(0, 0, 0, 0.03);
+}
+
+.info__label {
+  font-weight: bold;
 }
 
 .info__label,
@@ -149,7 +152,6 @@ export default {
 .info__span {
   color: black;
   text-transform: uppercase;
-  font-weight: bold;
 }
 
 .calculator__item {

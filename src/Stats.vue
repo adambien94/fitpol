@@ -196,12 +196,12 @@ export default {
 }
 
 .input-box {
-  width: 85%;
+  width: 80%;
   background: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -70%);
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
   z-index: 5;
   border-radius: 3px;
@@ -234,7 +234,6 @@ export default {
   font-size: 17px;
   line-height: 36px;
   border-radius: 2px;
-  text-align: left;
   padding: 0 10px;
   margin-left: 15px;
   color: rgba(0, 0, 0, 0.6);

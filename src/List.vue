@@ -316,7 +316,7 @@ export default {
 }
 
 .input-box {
-  width: 300px;
+  width: 80%;
   background: #fff;
   position: absolute;
   top: 50%;

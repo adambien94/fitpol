@@ -2,17 +2,13 @@
   <div id="app">
     <app-header v-on:slideCarousel="slideComp($event)" v-on:slideHam="slideHamMenu($event)"></app-header>
     <div class="ham-container">
-      <div class="ham-container-2">
-        <app-menu
-          v-on:slideHam2="slideHamMenuContainer($event)"
-          v-on:slideHam="slideHamMenu($event)"
-        ></app-menu>
-        <app-personal
-          v-on:slideHam2="slideHamMenuContainer($event)"
-          v-on:slideHam="slideHamMenu($event)"
-        ></app-personal>
-      </div>
+      <app-menu v-on:slideHam2="personalToggle($event)" v-on:slideHam="slideHamMenu($event)"></app-menu>
     </div>
+    <app-personal
+      v-if="personalShow"
+      v-on:slideHam2="personalToggle($event)"
+      v-on:slideHam="slideHamMenu($event)"
+    ></app-personal>
     <div
       class="carousel-container"
       v-touch:swipe.left="swipeContainerLeft"
@@ -57,7 +53,7 @@ export default {
       currentWeight: 0,
       currentWaist: 0,
       show: false,
-      show2: false,
+      personalShow: false,
       currentSlide: 0
     };
   },
@@ -89,18 +85,9 @@ export default {
         }, 0);
       }
     },
-    slideHamMenuContainer() {
-      this.show2 = !this.show2;
-      const hamMenu2 = document.querySelector(".ham-container-2");
-      if (this.show2) {
-        setTimeout(() => {
-          hamMenu2.style.transform = "translateX(-50%)";
-        }, 0);
-      } else {
-        setTimeout(() => {
-          hamMenu2.style.transform = "translateX(0)";
-        }, 0);
-      }
+    personalToggle() {
+      this.personalShow = !this.personalShow;
+      console.log("hehe");
     },
     swipeContainerLeft() {
       if (this.currentSlide < 3) {
