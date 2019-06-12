@@ -13,10 +13,6 @@
         <img src="./img/sharp_fitness_center_black_18dp.png" class="menu__item__img">
         <a href="#" class="menu__link">Cel</a>
       </li>
-      <li class="menu__item">
-        <img src="./img/sharp_fitness_center_black_18dp.png" class="menu__item__img">
-        <a href="#" class="menu__link">Coś tu będzie</a>
-      </li>
     </ul>
     <button v-on:click="resetData()" class="reset-btn">reset</button>
   </div>
