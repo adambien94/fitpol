@@ -16,7 +16,7 @@
     >
       <app-list></app-list>
       <app-analysis></app-analysis>
-      <app-chart></app-chart>
+      <app-chart v-bind:ranChart="ranChart"></app-chart>
       <app-stats></app-stats>
       <transition name="v">
         <div v-if="show" class="blackout" v-on:click="slideHamMenu()"></div>
@@ -54,7 +54,8 @@ export default {
       currentWaist: 0,
       show: false,
       personalShow: false,
-      currentSlide: 0
+      currentSlide: 0,
+      ranChart: false
     };
   },
   methods: {
@@ -69,6 +70,12 @@ export default {
         carousel.style.transform = "translateX(-" + arg * appWidth + "px)";
       }, 0);
       this.currentSlide = arg;
+      this.updateChartComp(arg);
+    },
+    updateChartComp(indexOfComp) {
+      if (indexOfComp === 2) {
+        this.ranChart = true;
+      }
     },
     slideHamMenu() {
       this.show = !this.show;
@@ -122,9 +129,12 @@ export default {
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+body {
+  background: rgba(0, 0, 0, 0.9);
+}
 
 #app {
-  max-width: 500px;
+  max-width: 450px;
   margin: 0px auto;
   font-family: "Arial", sans-serif;
   position: relative;
@@ -165,7 +175,6 @@ export default {
   top: -200px;
   width: 100%;
   height: 150%;
-  transition: 0.2s;
   background: rgba(0, 0, 0, 0.4);
   z-index: 4;
 }
@@ -175,7 +184,7 @@ export default {
 }
 
 .v-enter-active {
-  transition: opacity 0.14s;
+  transition: opacity 0.2s;
 }
 
 .v-leave {
@@ -185,5 +194,27 @@ export default {
 .v-leave-active {
   transition: opacity 0.2s;
   opacity: 0;
+}
+
+@media (min-width: 1500px) {
+  #app {
+    width: 420px;
+    margin: 50px auto;
+  }
+
+  .carousel-container {
+    height: calc(82vh - 96px);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1499px) {
+  #app {
+    width: 340px;
+    margin: 14px auto;
+  }
+
+  .carousel-container {
+    height: calc(95vh - 96px);
+  }
 }
 </style>

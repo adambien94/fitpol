@@ -50,9 +50,9 @@ export default {
 
 <style scoped>
 .main-nav {
+  max-width: 450px;
   position: fixed;
   z-index: 0;
-  max-width: 500px;
   width: 100%;
   /* box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.2); */
 }
@@ -127,10 +127,6 @@ export default {
   transition: 0.2s;
 }
 
-.bottom-nav__link:focus {
-  color: black;
-}
-
 .active-border {
   position: absolute;
   height: 48px;
@@ -139,5 +135,17 @@ export default {
   z-index: 8;
   bottom: 0px;
   transition: 0.225s;
+}
+
+@media (min-width: 1500px) {
+  .main-nav {
+    width: 420px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1499px) {
+  .main-nav {
+    width: 340px;
+  }
 }
 </style>

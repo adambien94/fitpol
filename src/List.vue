@@ -193,9 +193,6 @@ export default {
   mounted() {
     this.labelShadow();
   }
-  // updated() {
-  //   this.updateData();
-  // }
 };
 </script>
 
@@ -261,7 +258,10 @@ export default {
 .data {
   height: calc(100vh - 150px);
   overflow-y: scroll;
-  z-index: 1;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .emot {
@@ -417,4 +417,15 @@ export default {
   border: 1px solid rgb(0, 0, 0, 0.2);
   border-radius: 2px;
 } */
+
+@media (min-width: 500px) {
+  .data {
+    position: absolute;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -17px;
+  }
+}
 </style>

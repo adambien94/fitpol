@@ -1,19 +1,22 @@
 <template>
   <div id="menu">
-    <ul class="week-list">
-      <li
-        class="day"
-        v-bind:class="{'day--opened': index === activeDay}"
-        v-for="(day, index) in days"
-        v-on:click="showDayMenu(index)"
-      >
-        <span class="day__label">{{day}}</span>
-        <span class="day__dots">...</span>
-        <ul class="day__meals" v-on:click="showInput(index)">
-          <li class="meals__item" v-for="meal in meals[index]">- {{meal}}</li>
-        </ul>
-      </li>
-    </ul>
+    <div class="scroll-container">
+      <ul class="week-list">
+        <li
+          class="day"
+          v-bind:class="{'day--opened': index === activeDay}"
+          v-for="(day, index) in days"
+          v-on:click="showDayMenu(index)"
+        >
+          <span class="day__label">{{day}}</span>
+          <span class="day__dots">...</span>
+          <ul class="day__meals" v-on:click="showInput(index)">
+            <li class="meals__item" v-for="meal in meals[index]">- {{meal}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
     <transition name="v">
       <div v-if="show" class="input-box">
         <h2 class="input-box__title">Menu - {{days[dayIndex]}}</h2>
@@ -129,12 +132,13 @@ export default {
 #menu {
   flex: 1;
   position: relative;
+  background: #fff;
 }
 
-.week-list {
-  height: 100%;
+.scroll-container {
   overflow-y: scroll;
-  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .day {
@@ -267,6 +271,17 @@ export default {
   border-radius: 2px;
   font-size: 18px;
   font-weight: bold;
+}
+
+@media (min-width: 500px) {
+  .scroll-container {
+    position: absolute;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -17px;
+  }
 }
 </style>
 

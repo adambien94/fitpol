@@ -1,26 +1,28 @@
 <template>
   <div id="chart">
-    <!-- wykres waga -->
-    <div class="chart-container">
-      <span class="chart-label">Waga</span>
-      <span class="chart-info">({{parseFloat(lostWeight).toFixed(1)}}kg)</span>
-      <span class="chart-day">Dzień {{testWeight.length}}</span>
-      <canvas id="my-chart-1"></canvas>
-    </div>
-    <!-- wykres pas -->
-    <div class="chart-container">
-      <span class="chart-label">Pas</span>
-      <span class="chart-info">({{parseFloat(lostWaist).toFixed(1)}}cm)</span>
-      <canvas id="my-chart-3"></canvas>
-    </div>
-    <!-- pasek status -->
-    <div class="score-container">
-      <span class="chart-label">Dajesz z siebie</span>
-      <span class="chart-info">{{parseFloat(testScore).toFixed(0)}}%</span>
-      <span class="chart-emot">{{testScoreEmot}}</span>
-      <ul class="score-bar">
-        <li v-for="emot in testEmots" v-bind:class="emot"></li>
-      </ul>
+    <div class="scroll-container">
+      <!-- wykres waga -->
+      <div class="chart-container">
+        <span class="chart-label">Waga</span>
+        <span class="chart-info">({{parseFloat(lostWeight).toFixed(1)}}kg)</span>
+        <span class="chart-day">Dzień {{testWeight.length}}</span>
+        <canvas id="my-chart-1"></canvas>
+      </div>
+      <!-- wykres pas -->
+      <div class="chart-container">
+        <span class="chart-label">Pas</span>
+        <span class="chart-info">({{parseFloat(lostWaist).toFixed(1)}}cm)</span>
+        <canvas id="my-chart-3"></canvas>
+      </div>
+      <!-- pasek status -->
+      <div class="score-container">
+        <span class="chart-label">Dajesz z siebie</span>
+        <span class="chart-info">{{parseFloat(testScore).toFixed(0)}}%</span>
+        <span class="chart-emot">{{testScoreEmot}}</span>
+        <ul class="score-bar">
+          <li v-for="emot in testEmots" v-bind:class="emot"></li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +30,7 @@
 
 <script>
 export default {
+  props: ["ranChart"],
   data() {
     return {
       weight: [],
@@ -240,9 +243,14 @@ export default {
       }
     }
   },
+  watch: {
+    ranChart() {
+      this.updateCharts();
+    }
+  },
   mounted() {
     this.updateDays();
-    this.updateCharts();
+    // this.updateCharts();
   },
   updated() {
     this.updateCharts();
@@ -257,6 +265,13 @@ export default {
   flex: 1;
   position: relative;
   height: 100%;
+}
+
+.scroll-container {
+  overflow-y: scroll;
+  position: absolute;
+  z-index: 0;
+  width: 100%;
   overflow-y: scroll;
 }
 
@@ -319,5 +334,15 @@ export default {
 
 .chart-emot {
   font-size: 16px;
+}
+
+@media (min-width: 500px) {
+  .scroll-container {
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -17px;
+  }
 }
 </style>
