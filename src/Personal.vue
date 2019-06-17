@@ -4,7 +4,6 @@
       <div class="back-arrow" v-on:click="slideHam2"></div>
     </div>
     <div class="input-box">
-      <!-- <h2 class="input-box__title">Waga</h2> -->
       <form id="my-form">
         <div class="input-box__item">
           <label class="input-box__label" for>Wiek:</label>
@@ -14,10 +13,19 @@
           <label class="input-box__label" for>Wzrost:</label>
           <input class="input-box__input" type="number" placeholder="[cm]" v-model="height">
         </div>
-
         <div class="input-box__item">
           <label class="input-box__label" for>Płeć:</label>
           <input class="input-box__input" type="text" placeholder="M/K" v-model="sex">
+        </div>
+        <div class="input-box__item">
+          <label class="input-box__label" for>Aktywność:</label>
+          <select name class="input-box__select" v-model="activity">
+            <option value="1.2">brak aktywności, praca siedząca</option>
+            <option value="1.35">praca siedząca, 1-2 treningi w tygodniu</option>
+            <option value="1.55">praca siedząca, treningi 3-4 razy w tygodniu</option>
+            <option value="1.75">praca fizyczna, 3-4 treningi w tygodniu</option>
+            <option value="2">zawodowy sportowiec, osoba codziennie trenująca</option>
+          </select>
         </div>
         <div class="clearfix"></div>
       </form>
@@ -32,7 +40,8 @@ export default {
     return {
       height: null,
       sex: "",
-      age: null
+      age: null,
+      activity: null
     };
   },
   methods: {
@@ -40,7 +49,7 @@ export default {
       if (isNaN(this.age)) {
         alert("błędne dane");
       } else if (this.age === null) {
-        console.log("hahaha");
+        console.log("age is null");
       } else {
         this.$store.commit("storeAge", this.age);
       }
@@ -48,8 +57,8 @@ export default {
     storeHeight() {
       if (isNaN(this.height)) {
         alert("błędne dane");
-      } else if (this.age === null) {
-        console.log("hahaha");
+      } else if (this.height === null) {
+        console.log("height is null");
       } else {
         this.$store.commit("storeHeight", this.height);
       }
@@ -58,16 +67,25 @@ export default {
       if (!isNaN(this.sex)) {
         alert("błędne danee");
       } else if (this.sex === null) {
-        console.log("hahaha");
+        console.log("sex is null");
       } else {
         this.$store.commit("storeSex", this.sex);
+      }
+    },
+    storeActivity() {
+      if (this.activity === null) {
+        this.activity = 1.2;
+      } else {
+        this.$store.commit("storeActivity", parseFloat(this.activity));
       }
     },
     setData() {
       this.storeAge();
       this.storeHeight();
       this.storeSex();
+      this.storeActivity();
       localStorage.setItem("mojeInfo", JSON.stringify(this.personalInfo));
+      console.log(this.personalInfo);
     },
     updateInfo() {
       this.$store.commit("updateInfo");
@@ -94,10 +112,11 @@ export default {
 <style scoped>
 #personal {
   background: #fff;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   z-index: 555;
   position: absolute;
+  top: 0;
 }
 
 .input-box {
@@ -139,11 +158,12 @@ export default {
 .input-box__select {
   float: right;
   border: 1px solid rgb(0, 0, 0, 0.2);
-  font-size: 22px;
-  height: 48px;
+  font-size: 12px;
+  height: 38px;
   display: block;
   line-height: 22px;
   border-radius: 2px;
+  width: 50px;
 }
 
 .input-box__label {

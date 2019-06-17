@@ -36,6 +36,13 @@
         </span>
       </div>
       <div class="calculator__item">
+        <span class="calculator__label">CPM (dzienne zapotrzebowanie kaloryczne)</span>
+        <span class="calculator__span">
+          {{cpm}}
+          <span class="gray-span">kcal</span>
+        </span>
+      </div>
+      <div class="calculator__item">
         <span class="calculator__label">Test (na procent)</span>
         <span class="calculator__span">87%</span>
       </div>
@@ -75,6 +82,9 @@ export default {
     sex() {
       return this.$store.state.personalInfo.sex;
     },
+    activity() {
+      return this.$store.state.personalInfo.activity;
+    },
     lastData() {
       return this.$store.state.dataArr[this.$store.state.dataArr.length - 1];
     },
@@ -92,6 +102,10 @@ export default {
       let myBmr =
         66 + 13.7 * this.lastWeight + 5 * this.heightM * 100 - 6.76 * this.age;
       return parseFloat(myBmr).toFixed(0);
+    },
+    cpm() {
+      let myCpm = this.bmr * this.activity;
+      return myCpm.toFixed(0);
     },
     status() {
       if (this.bmi < 20) {
@@ -148,7 +162,7 @@ export default {
 .info__span {
   display: block;
   text-align: center;
-  color: rgb(0, 0, 0, 1);
+  color: #000;
 }
 
 .info__span {

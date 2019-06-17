@@ -7,18 +7,6 @@ export const store = new Vuex.Store({
   state: {
     dataArr: [
       {
-        date: "19-24-04",
-        weight: 89.2,
-        emot: "😊",
-        note: 96.3
-      },
-      {
-        date: "19-03-12",
-        weight: 89.1,
-        emot: "😊",
-        note: 94.2
-      },
-      {
         date: "19-04-04",
         weight: 89.0,
         emot: "😡",
@@ -166,57 +154,46 @@ export const store = new Vuex.Store({
       },
       {
         date: "19-04-04",
-        weight: 86.5,
+        weight: "-",
         emot: "😊",
-        note: 85.1
-      },
-      {
-        date: "19-03-12",
-        weight: 88.7,
-        emot: "😊",
-        note: 91.4
+        note: "-"
       },
       {
         date: "19-04-04",
-        weight: 88.3,
-        emot: "😊",
-        note: 88.5
-      },
-      {
-        date: "19-04-04",
-        weight: 88.1,
+        weight: 86.2,
         emot: "😡",
-        note: 87.9
+        note: "-"
       },
       {
         date: "19-03-12",
         weight: "-",
         emot: "😊",
-        note: 87.7
+        note: "-"
       },
       {
         date: "19-04-04",
-        weight: 86.9,
+        weight: 84.5,
         emot: "😊",
-        note: 87.6
+        note: 85.6
       },
       {
         date: "19-03-12",
-        weight: 86.5,
+        weight: 83.1,
         emot: "😊",
-        note: 85.9
+        note: 84.9
       },
       {
         date: "19-04-04",
-        weight: 86.5,
+        weight: 82.9,
         emot: "😊",
-        note: 85.1
+        note: 84.5
       }
     ],
     personalInfo: {
       age: 23,
       height: 183,
-      sex: "M"
+      sex: "M",
+      activity: 2
     },
     meals: [
       ["", "", "", ""],
@@ -261,6 +238,9 @@ export const store = new Vuex.Store({
     },
     storeSex: (state, sex) => {
       state.personalInfo.sex = sex;
+    },
+    storeActivity: (state, activity) => {
+      state.personalInfo.activity = activity;
     },
     updateData: state => {
       state.dataArr =

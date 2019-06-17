@@ -229,10 +229,16 @@ export default {
   line-height: 48px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.03);
   cursor: pointer;
+  position: relative;
 }
 
-.data__item:last-child {
-  padding-bottom: 95px;
+.data__item:last-child:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 95px;
+  width: 20px;
+  top: 100%;
 }
 
 .label-bar__label {
@@ -256,11 +262,10 @@ export default {
 }
 
 .data {
-  height: calc(100vh - 150px);
   overflow-y: scroll;
   z-index: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 48px);
   overflow-y: scroll;
 }
 
@@ -422,8 +427,7 @@ export default {
   .data {
     position: absolute;
     width: auto;
-    top: 0;
-    bottom: 0;
+    top: 48px;
     left: 0;
     right: -17px;
   }

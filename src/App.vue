@@ -130,7 +130,7 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 #app {
@@ -140,6 +140,7 @@ body {
   position: relative;
   color: #05161c;
   overflow: hidden;
+  height: 100vh;
 }
 
 .ham-container {
@@ -162,7 +163,7 @@ body {
 }
 
 .carousel-container {
-  margin-top: 96px;
+  /* margin-top: 96px; */
   display: flex;
   width: 400%;
   background: white;
@@ -172,7 +173,7 @@ body {
 
 .blackout {
   position: absolute;
-  top: -200px;
+  top: -96px;
   width: 100%;
   height: 150%;
   background: rgba(0, 0, 0, 0.4);
@@ -203,7 +204,7 @@ body {
   }
 
   .carousel-container {
-    height: calc(82vh - 96px);
+    height: calc(82vh);
   }
 }
 

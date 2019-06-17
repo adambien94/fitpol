@@ -90,4 +90,10 @@ export default {
   color: gray;
   border: none;
 }
+
+.menu__item:nth-child(1),
+.menu__item:nth-child(3) {
+  color: red;
+  opacity: 0.4;
+}
 </style>
