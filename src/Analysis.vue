@@ -66,6 +66,7 @@ export default {
       norma: ""
     };
   },
+  methods: {},
   computed: {
     dataArr() {
       return this.$store.state.dataArr;
@@ -155,7 +156,7 @@ export default {
 }
 
 .info__label {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .info__label,
@@ -179,16 +180,16 @@ export default {
 .calculator__span {
   display: block;
   padding-left: 15px;
-  font-weight: bold;
 }
 
 .calculator__label {
+  font-weight: 500;
 }
 
 .calculator__span {
   color: #d81159;
   padding-top: 0px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .gray-span {

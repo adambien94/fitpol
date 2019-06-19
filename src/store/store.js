@@ -193,7 +193,8 @@ export const store = new Vuex.Store({
       age: 23,
       height: 183,
       sex: "M",
-      activity: 2
+      activity: 2,
+      weightGoal: 72
     },
     meals: [
       ["", "", "", ""],
@@ -241,6 +242,9 @@ export const store = new Vuex.Store({
     },
     storeActivity: (state, activity) => {
       state.personalInfo.activity = activity;
+    },
+    storeWeightGoal: (state, weightGoal) => {
+      state.personalInfo.weightGoal = weightGoal;
     },
     updateData: state => {
       state.dataArr =

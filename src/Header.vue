@@ -132,8 +132,8 @@ export default {
   height: 48px;
   width: 25%;
   background: rgba(0, 0, 0, 0.1);
-  z-index: 8;
+  z-index: 4;
   bottom: 0px;
-  transition: 0.225s;
+  transition: transform 0.225s;
 }
 </style>

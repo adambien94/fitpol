@@ -35,7 +35,7 @@ export default {
     return {
       weight: [],
       goal: 75,
-      weightGoal: [],
+      weightGoalArr: [],
       waist: [],
       period: 20,
       days: [],
@@ -51,6 +51,7 @@ export default {
       let myChart = document.getElementById("my-chart-1").getContext("2d");
       Chart.defaults.global.defaultFontSize = 10;
       Chart.defaults.global.defaultFontColor = "black";
+      this.setWeightGoal();
 
       var testChart = new Chart(myChart, {
         type: "line", // bar, horizontalBar, line, pie, doughnut, radar, polarArea
@@ -70,9 +71,10 @@ export default {
               borderWidth: 2
             },
             {
-              data: this.weightGoal,
+              data: this.weightGoalArr,
               pointRadius: 0,
               borderWidth: 1,
+              borderColor: ["#4DB8D1"],
               fill: false
             }
           ]
@@ -140,11 +142,15 @@ export default {
         }
       });
     },
-
     updateDays() {
       for (let i = 0; i < this.period; i++) {
-        this.weightGoal.push(this.goal);
         this.days.push(i + 1);
+      }
+    },
+    setWeightGoal() {
+      this.weightGoalArr = [];
+      for (let i = 0; i < this.period; i++) {
+        this.weightGoalArr.push(this.weightGoal);
       }
     }
     // updateScore() {
@@ -164,6 +170,9 @@ export default {
     },
     age() {
       return this.$store.state.personalInfo.age;
+    },
+    weightGoal() {
+      return this.$store.state.personalInfo.weightGoal;
     },
     lastWeight() {
       return this.$store.getters.lastWeight;
@@ -246,11 +255,13 @@ export default {
   watch: {
     ranChart() {
       this.updateCharts();
+    },
+    weightGoal() {
+      this.updateCharts();
     }
   },
   mounted() {
     this.updateDays();
-    // this.updateCharts();
   },
   updated() {
     this.updateCharts();
@@ -289,7 +300,7 @@ export default {
 
 .chart-label {
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
   color: black;
   padding: 0px 0px 0px 15px;
   line-height: 34px;
@@ -304,7 +315,7 @@ export default {
 .chart-day {
   font-size: 15px;
   margin-top: 4px;
-  font-weight: bold;
+  font-weight: 500;
   float: right;
   padding-top: 5px;
   padding-right: 15px;

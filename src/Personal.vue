@@ -7,15 +7,19 @@
       <form id="my-form">
         <div class="input-box__item">
           <label class="input-box__label" for>Wiek:</label>
-          <input class="input-box__input" type="text" placeholder="-" v-model="age">
+          <input class="input-box__input" type="number" placeholder="-" v-model="age">
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Wzrost:</label>
-          <input class="input-box__input" type="number" placeholder="[cm]" v-model="height">
+          <input class="input-box__input" type="number" placeholder="[ cm ]" v-model="height">
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Płeć:</label>
           <input class="input-box__input" type="text" placeholder="M/K" v-model="sex">
+        </div>
+        <div class="input-box__item">
+          <label class="input-box__label" for>Cel:</label>
+          <input class="input-box__input" type="number" placeholder="[ kg ]" v-model="weightGoal">
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Aktywność:</label>
@@ -41,7 +45,8 @@ export default {
       height: null,
       sex: "",
       age: null,
-      activity: null
+      activity: null,
+      weightGoal: null
     };
   },
   methods: {
@@ -72,6 +77,16 @@ export default {
         this.$store.commit("storeSex", this.sex);
       }
     },
+    storeWeightGoal() {
+      if (isNaN(this.weightGoal)) {
+        alert("błędne danexe");
+      } else if (this.weightGoal === null) {
+        console.log("weightGoal is null");
+      } else {
+        console.log("weightGoal poszlo");
+        this.$store.commit("storeWeightGoal", this.weightGoal);
+      }
+    },
     storeActivity() {
       if (this.activity === null) {
         this.activity = 1.2;
@@ -84,8 +99,8 @@ export default {
       this.storeHeight();
       this.storeSex();
       this.storeActivity();
+      this.storeWeightGoal();
       localStorage.setItem("mojeInfo", JSON.stringify(this.personalInfo));
-      console.log(this.personalInfo);
     },
     updateInfo() {
       this.$store.commit("updateInfo");
@@ -94,7 +109,6 @@ export default {
       this.$emit("slideHam2");
     },
     slideHam() {
-      console.log("hehe");
       this.$emit("slideHam");
     }
   },
@@ -141,13 +155,14 @@ export default {
 
 .input-box__item {
   margin-bottom: 12px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .input-box__input {
   float: right;
   width: 155px;
-  border: 1px solid rgb(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   font-size: 17px;
   line-height: 36px;
   border-radius: 2px;
@@ -155,9 +170,14 @@ export default {
   color: black;
 }
 
+.input-box__input[type="text"] {
+  text-transform: capitalize;
+}
+
 .input-box__select {
   float: right;
-  border: 1px solid rgb(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   font-size: 12px;
   height: 38px;
   display: block;

@@ -154,7 +154,7 @@ export default {
   display: block;
   font-size: 15px;
   padding-left: 15px;
-  font-weight: bold;
+  font-weight: 500;
   text-transform: capitalize;
 }
 
@@ -218,8 +218,7 @@ export default {
   font-weight: bold;
   line-height: 28px;
   padding: 14px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
-  /* background: #ededed; */
+  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
 }
 
 .input-box form {
@@ -234,11 +233,12 @@ export default {
 
 .input-box__input {
   width: calc(100% - 50px);
-  border: 1px solid rgb(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   font-size: 17px;
   line-height: 36px;
-  border-radius: 2px;
   padding: 0 10px;
+  border-radius: 2px;
   margin-left: 15px;
   color: rgba(0, 0, 0, 0.6);
 }
@@ -255,7 +255,7 @@ export default {
 
 .input-box__buttons {
   display: flex;
-  background: #ededed;
+  /* background: #ededed; */
   padding: 3px;
 }
 

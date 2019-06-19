@@ -81,15 +81,11 @@ export default {
       this.show = !this.show;
       const hamMenu = document.querySelector(".ham-container");
       if (this.show) {
-        setTimeout(() => {
-          hamMenu.style.left = "0";
-          hamMenu.style.boxShadow = "0px 3px 16px 2px rgba(0, 0, 0, 0.2)";
-        }, 0);
+        hamMenu.style.transform = "translateX(100%)";
+        hamMenu.style.boxShadow = "0px 3px 16px 2px rgba(0, 0, 0, 0.2)";
       } else {
-        setTimeout(() => {
-          hamMenu.style.left = "-80%";
-          hamMenu.style.boxShadow = "none";
-        }, 0);
+        hamMenu.style.transform = "translateX(-50px)";
+        hamMenu.style.boxShadow = "none";
       }
     },
     personalToggle() {
@@ -136,7 +132,7 @@ body {
 #app {
   max-width: 450px;
   margin: 0px auto;
-  font-family: "Arial", sans-serif;
+  font-family: "Roboto", serif;
   position: relative;
   color: #05161c;
   overflow: hidden;
@@ -152,14 +148,14 @@ body {
   z-index: 10;
   top: 0;
   left: -80%;
-  transition: 0.225s;
+  transition: transform 0.225s;
   overflow: hidden;
 }
 
 .ham-container-2 {
   width: 200%;
   display: flex;
-  transition: 0.225s;
+  transition: transform 0.225s;
 }
 
 .carousel-container {
@@ -168,7 +164,7 @@ body {
   width: 400%;
   background: white;
   height: calc(100vh - 96px);
-  transition: 0.225s;
+  transition: transform 0.225s;
 }
 
 .blackout {

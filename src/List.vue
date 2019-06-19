@@ -243,7 +243,7 @@ export default {
 
 .label-bar__label {
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 400;
   color: black;
   position: relative;
   /* border-right: 1px solid rgb(0, 0, 0, 0.05); */
@@ -282,15 +282,15 @@ export default {
 }
 
 .data__item .date {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .data__item .note {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .data__item .weight {
-  font-weight: bold;
+  font-weight: 500;
   color: #d81159;
   /* color: #000; */
 }
@@ -339,7 +339,7 @@ export default {
   font-weight: bold;
   line-height: 28px;
   padding: 14px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
+  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
 }
 
 .input-box form {
@@ -348,13 +348,14 @@ export default {
 
 .input-box__item {
   margin-bottom: 12px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .input-box__input {
   float: right;
   width: 140px;
-  border: 1px solid rgb(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   font-size: 17px;
   line-height: 36px;
   border-radius: 2px;
@@ -363,10 +364,10 @@ export default {
 
 .input-box__select {
   float: right;
-  border: 1px solid rgb(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   font-size: 22px;
   height: 48px;
-  /* width: 48px; */
   display: block;
   line-height: 22px;
   border-radius: 2px;
@@ -381,7 +382,7 @@ export default {
 
 .input-box__buttons {
   display: flex;
-  background: #ededed;
+  /* background: #ededed; */
   padding: 3px;
 }
 
