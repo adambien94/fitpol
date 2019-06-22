@@ -194,9 +194,18 @@ export const store = new Vuex.Store({
       height: 183,
       sex: "M",
       activity: 2,
-      weightGoal: 72
+      weightGoal: 76
     },
     meals: [
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""]
+    ],
+    mealsNull: [
       ["", "", "", ""],
       ["", "", "", ""],
       ["", "", "", ""],
@@ -225,6 +234,21 @@ export const store = new Vuex.Store({
         }
       }
       return lastWaist;
+    },
+    noData: state => {
+      var noData;
+      if (
+        state.dataArr.length === 0 ||
+        state.personalInfo.age === null ||
+        state.personalInfo.height === null ||
+        state.personalInfo.sex === null ||
+        state.personalInfo.weightGoal === null
+      ) {
+        noData = true;
+      } else {
+        noData = false;
+      }
+      return noData;
     }
   },
   mutations: {
@@ -251,9 +275,15 @@ export const store = new Vuex.Store({
         JSON.parse(localStorage.getItem("mojeDane")) || state.dataArr;
     },
     resetData: state => {
+      state.dataArr = [];
+      localStorage.setItem("mojeDane", JSON.stringify(state.dataArr));
+    },
+    resetMeals: state => {
+      state.meals = state.mealsNull;
+      localStorage.setItem("mojeMenu", JSON.stringify(state.meals));
+    },
+    defaultData: state => {
       state.dataArr = state.dataArrDefault || state.dataArr;
-      console.log(state.dataArr);
-      console.log(state.dataArrDefault);
       localStorage.setItem("mojeDane", JSON.stringify(state.dataArr));
     },
     updateInfo: state => {

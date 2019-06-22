@@ -11,15 +11,15 @@
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Wzrost:</label>
-          <input class="input-box__input" type="number" placeholder="[ cm ]" v-model="height">
+          <input class="input-box__input" type="number" placeholder="cm" v-model="height">
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Płeć:</label>
-          <input class="input-box__input" type="text" placeholder="M/K" v-model="sex">
+          <input class="input-box__input" type="text" placeholder="M / K" v-model="sex">
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Cel:</label>
-          <input class="input-box__input" type="number" placeholder="[ kg ]" v-model="weightGoal">
+          <input class="input-box__input" type="number" placeholder="kg" v-model="weightGoal">
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Aktywność:</label>
@@ -45,8 +45,7 @@ export default {
       height: null,
       sex: "",
       age: null,
-      activity: null,
-      weightGoal: null
+      activity: null
     };
   },
   methods: {
@@ -119,6 +118,10 @@ export default {
   },
   created() {
     this.updateInfo();
+    this.age = this.personalInfo.age;
+    this.height = this.personalInfo.height;
+    this.sex = this.personalInfo.sex;
+    this.weightGoal = this.personalInfo.weightGoal;
   }
 };
 </script>
@@ -183,12 +186,13 @@ export default {
   display: block;
   line-height: 22px;
   border-radius: 2px;
-  width: 50px;
+  width: 155px;
 }
 
 .input-box__label {
   font-size: 20px;
   line-height: 36px;
+  /* font-weight: 400; */
 }
 
 .personal__set-btn {
@@ -211,7 +215,7 @@ export default {
 }
 
 .grey {
-  background: #ededed;
+  /* background: #ededed; */
   height: 50px;
   margin-bottom: 10px;
 }

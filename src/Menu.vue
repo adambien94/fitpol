@@ -2,7 +2,7 @@
   <div id="menu" v-touch:swipe.left="slideHam">
     <ul class="menu__list">
       <li class="menu__item">
-        <img src="./img/baseline_search_black_24dp.png" class="menu__item__img">
+        <img src="./img/settings.png" class="menu__item__img">
         <a href="#" class="menu__link">Ustawienia</a>
       </li>
       <li class="menu__item">
@@ -14,7 +14,6 @@
         <a href="#" class="menu__link">Cel</a>
       </li>
     </ul>
-    <button v-on:click="resetData()" class="reset-btn">reset</button>
   </div>
 </template>
 
@@ -31,10 +30,6 @@ export default {
     };
   },
   methods: {
-    resetData() {
-      this.$store.commit("resetData");
-      this.$store.commit("resetInfo");
-    },
     slideHam2() {
       this.$emit("slideHam2");
     },
@@ -86,7 +81,7 @@ export default {
   margin: 25px 15px;
   background: transparent;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   color: gray;
   border: none;
 }

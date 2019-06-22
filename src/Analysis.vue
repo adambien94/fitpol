@@ -1,57 +1,70 @@
 <template>
   <div id="analysis">
-    <div class="info">
-      <div class="info__item">
-        <span class="info__label">Wzrost</span>
-        <span class="info__span">{{height}}</span>
+    <span class="no-data-info" v-if="!storedData">{{blankInfo}}</span>
+    <div class="container" v-if="storedData">
+      <div class="info">
+        <div class="info__item">
+          <span class="info__label">Wiek</span>
+          <span class="info__span">{{age}}</span>
+        </div>
+        <div class="info__item">
+          <span class="info__label">Wzrost</span>
+          <span class="info__span">{{height}}</span>
+        </div>
+        <div class="info__item">
+          <span class="info__label">Waga</span>
+          <span class="info__span">{{lastWeight}}</span>
+        </div>
+        <div class="info__item">
+          <span class="info__label">Płeć</span>
+          <span class="info__span">{{sex}}</span>
+        </div>
       </div>
-      <div class="info__item">
-        <span class="info__label">Waga</span>
-        <span class="info__span">{{lastWeight}}</span>
-      </div>
-      <div class="info__item">
-        <span class="info__label">Wiek</span>
-        <span class="info__span">{{age}}</span>
-      </div>
-      <div class="info__item">
-        <span class="info__label">Płeć</span>
-        <span class="info__span">{{sex}}</span>
-      </div>
-    </div>
 
-    <div class="calculator">
-      <div class="calculator__item">
-        <span class="calculator__label">BMI (wskaźnik masy ciała):</span>
-        <span class="calculator__span">
-          {{bmi}}
-          <span class="gray-span">{{status}}</span>
-          <span class="emot-span">{{statusEmot}}</span>
-        </span>
-      </div>
-      <div class="calculator__item">
-        <span class="calculator__label">BMR (podst. przemiana materii):</span>
-        <span class="calculator__span">
-          {{bmr}}
-          <span class="gray-span">kcal</span>
-        </span>
-      </div>
-      <div class="calculator__item">
-        <span class="calculator__label">CPM (dzienne zapotrzebowanie kaloryczne)</span>
-        <span class="calculator__span">
-          {{cpm}}
-          <span class="gray-span">kcal</span>
-        </span>
-      </div>
-      <div class="calculator__item">
-        <span class="calculator__label">Test (na procent)</span>
-        <span class="calculator__span">87%</span>
-      </div>
-      <div class="calculator__item">
-        <span class="calculator__label">Lorem ipsum (coś tu będzie)</span>
-        <span class="calculator__span">
-          3021
-          <span class="gray-span">wynik</span>
-        </span>
+      <div class="calculator">
+        <div class="calculator__item">
+          <span class="calculator__label">BMI (wskaźnik masy ciała)</span>
+          <span class="calculator__span">
+            {{bmi}}
+            <span class="gray-span">{{status}}</span>
+            <span class="emot-span">{{statusEmot}}</span>
+          </span>
+        </div>
+        <div class="calculator__item">
+          <span class="calculator__label">BMR (podst. przemiana materii)</span>
+          <span class="calculator__span">
+            {{bmr}}
+            <span class="gray-span">kcal</span>
+          </span>
+        </div>
+        <div class="calculator__item">
+          <span class="calculator__label">CPM (dzienne zapotrzebowanie kaloryczne)</span>
+          <span class="calculator__span">
+            {{cpm}}
+            <span class="gray-span">kcal</span>
+          </span>
+        </div>
+        <div class="calculator__item">
+          <span class="calculator__label">Zapotrzebowanie na przybranie wagi</span>
+          <span class="calculator__span">
+            {{(cpm * 1) + 250}}
+            <span class="gray-span">kcal</span>
+          </span>
+        </div>
+        <div class="calculator__item">
+          <span class="calculator__label">Zapotrzebowanie na utratę wagi</span>
+          <span class="calculator__span">
+            {{(cpm * 1) - 200}}
+            <span class="gray-span">kcal</span>
+          </span>
+        </div>
+        <div class="calculator__item">
+          <span class="calculator__label">Lorem ipsum (coś tu będzie)</span>
+          <span class="calculator__span">
+            3021
+            <span class="gray-span">wynik</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -59,6 +72,7 @@
 
 <script>
 export default {
+  props: ["blankInfo", "storedData"],
   data() {
     return {
       weight: 0,
@@ -66,7 +80,11 @@ export default {
       norma: ""
     };
   },
-  methods: {},
+  methods: {
+    updateInfo() {
+      this.$store.commit("updateInfo");
+    }
+  },
   computed: {
     dataArr() {
       return this.$store.state.dataArr;
@@ -130,6 +148,9 @@ export default {
         return "😡";
       }
     }
+  },
+  created() {
+    this.updateInfo();
   }
 };
 </script>
@@ -144,6 +165,7 @@ export default {
   flex: 1;
   z-index: 2;
   background: #fff;
+  position: relative;
 }
 .info {
   display: flex;
@@ -156,7 +178,7 @@ export default {
 }
 
 .info__label {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .info__label,
@@ -169,11 +191,13 @@ export default {
 .info__span {
   color: black;
   text-transform: uppercase;
+  /* color: #d81159; */
+  /* font-size: 20px; */
 }
 
 .calculator__item {
   padding: 12px 0;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
+  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
 }
 
 .calculator__label,
@@ -188,13 +212,15 @@ export default {
 
 .calculator__span {
   color: #d81159;
+  font-size: 20px;
   padding-top: 0px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .gray-span {
   color: black;
   font-weight: 400;
+  /* color: rgba(0, 0, 0, 0.5); */
 }
 
 .emot-span {

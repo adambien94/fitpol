@@ -6,7 +6,7 @@
       <div class="label-bar__label emot">😄</div>
       <div class="label-bar__label note">✏️ cm</div>
     </div>
-
+    <span class="no-data-info" v-if="!storedData">dodaj pierwsze dane...</span>
     <ul class="data">
       <li v-for="data in dataArr.slice().reverse()" class="data__item" v-on:click="editData(data)">
         <span class="data__item__col date">{{data.date}}</span>
@@ -61,6 +61,7 @@
 
 <script>
 export default {
+  props: ["storedData"],
   data() {
     return {
       currentDate: "",
@@ -80,42 +81,46 @@ export default {
       this.index = this.dataArr.length;
     },
     addData() {
-      if (this.date === "") {
-        this.date = this.currentDate;
-      }
-      if (this.weight === "" || isNaN(this.weight)) {
-        this.weight = "-";
+      if (this.noData && (this.weight === "" || this.note === "")) {
+        alert("podaj wszystkie dane");
       } else {
-        this.weight = parseFloat(this.weight).toFixed(1);
+        if (this.date === "") {
+          this.date = this.currentDate;
+        }
+        if (this.weight === "" || isNaN(this.weight)) {
+          this.weight = "-";
+        } else {
+          this.weight = parseFloat(this.weight).toFixed(1);
+        }
+        if (this.emot === "") {
+          this.emot = "-";
+        }
+        if (this.note === "" || isNaN(this.note)) {
+          this.note = "-";
+        } else {
+          this.note = parseFloat(this.note).toFixed(1);
+        }
+        if (this.index === this.dataArr.length) {
+          this.dataArr.push({
+            date: this.date,
+            weight: this.weight,
+            emot: this.emot,
+            note: this.note
+          });
+          this.listAnimation();
+        } else {
+          this.dataArr[this.index].date = this.date;
+          this.dataArr[this.index].weight = this.weight;
+          this.dataArr[this.index].emot = this.emot;
+          this.dataArr[this.index].note = this.note;
+        }
+        this.index = this.dataArr.length;
+        this.show = !this.show;
+        this.clearData();
+        document.getElementById("my-form").reset();
+        // LOCAL STORAGE test
+        localStorage.setItem("mojeDane", JSON.stringify(this.dataArr));
       }
-      if (this.emot === "") {
-        this.emot = "-";
-      }
-      if (this.note === "" || isNaN(this.note)) {
-        this.note = "-";
-      } else {
-        this.note = parseFloat(this.note).toFixed(1);
-      }
-      if (this.index === this.dataArr.length) {
-        this.dataArr.push({
-          date: this.date,
-          weight: this.weight,
-          emot: this.emot,
-          note: this.note
-        });
-        this.listAnimation();
-      } else {
-        this.dataArr[this.index].date = this.date;
-        this.dataArr[this.index].weight = this.weight;
-        this.dataArr[this.index].emot = this.emot;
-        this.dataArr[this.index].note = this.note;
-      }
-      this.index = this.dataArr.length;
-      this.show = !this.show;
-      this.clearData();
-      document.getElementById("my-form").reset();
-      // LOCAL STORAGE test
-      localStorage.setItem("mojeDane", JSON.stringify(this.dataArr));
     },
     editData(data) {
       this.index = this.dataArr.indexOf(data);
@@ -141,11 +146,11 @@ export default {
     },
     listAnimation() {
       let list = document.querySelector(".data");
-      let listItemHeight = document
-        .querySelector(".data__item")
-        .getBoundingClientRect().height;
+      // let listItemHeight = document
+      //   .querySelector(".data__item")
+      //   .getBoundingClientRect().height;
       list.style.transition = "0";
-      list.style.transform = "translateY(-" + listItemHeight + "px)";
+      list.style.transform = "translateY(-48px)";
       setTimeout(function() {
         list.style.transition = "0.2s";
         list.style.transform = "translateY(0px)";
@@ -172,6 +177,9 @@ export default {
     },
     myIndex() {
       return this.$store.state.dataArr.length;
+    },
+    noData() {
+      return this.$store.getters.noData;
     }
   },
   created() {
@@ -191,7 +199,7 @@ export default {
     this.currentDate = fullDate;
   },
   mounted() {
-    this.labelShadow();
+    // this.labelShadow();
   }
 };
 </script>
@@ -227,7 +235,7 @@ export default {
   font-size: 15px;
   font-weight: 400;
   line-height: 48px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
+  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
   cursor: pointer;
   position: relative;
 }
@@ -246,7 +254,6 @@ export default {
   font-weight: 400;
   color: black;
   position: relative;
-  /* border-right: 1px solid rgb(0, 0, 0, 0.05); */
 }
 
 .label__img {
@@ -279,6 +286,10 @@ export default {
 .weight,
 .date {
   width: 100%;
+}
+
+.data__item:nth-child(odd) {
+  /* background: rgba(0, 0, 0, 0.02); */
 }
 
 .data__item .date {
@@ -378,6 +389,7 @@ export default {
 .input-box__label {
   font-size: 20px;
   line-height: 36px;
+  font-weight: 500;
 }
 
 .input-box__buttons {

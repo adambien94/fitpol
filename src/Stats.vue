@@ -100,6 +100,7 @@ export default {
     },
     updateMeals1() {
       this.$store.commit("updateMeals");
+      console.log(this.meals);
     }
   },
   computed: {
@@ -111,7 +112,6 @@ export default {
     }
   },
   created() {
-    // this.createMeals();
     this.updateMeals1();
     let date = new Date();
     let day = date.getDay();

@@ -1,6 +1,8 @@
 <template>
   <div id="chart">
-    <div class="scroll-container">
+    <!-- <button v-on:click="japa = !japa">click</button> -->
+    <span class="no-data-info" v-if="!storedData">{{blankInfo}}</span>
+    <div class="scroll-container" v-if="storedData">
       <!-- wykres waga -->
       <div class="chart-container">
         <span class="chart-label">Waga</span>
@@ -13,6 +15,7 @@
         <span class="chart-label">Pas</span>
         <span class="chart-info">({{parseFloat(lostWaist).toFixed(1)}}cm)</span>
         <canvas id="my-chart-3"></canvas>
+        <!-- <canvas id="my-chart-4"></canvas> -->
       </div>
       <!-- pasek status -->
       <div class="score-container">
@@ -30,7 +33,7 @@
 
 <script>
 export default {
-  props: ["ranChart"],
+  props: ["ranChart", "blankInfo", "storedData"],
   data() {
     return {
       weight: [],
@@ -68,13 +71,15 @@ export default {
               pointHoverBorderColor: "#D81159",
               pointRadius: 0,
               borderColor: ["#D81159"],
-              borderWidth: 2
+              borderWidth: 2,
+              fill: true,
+              backgroundColor: "rgba(216, 17, 89,0.05)"
             },
             {
               data: this.weightGoalArr,
               pointRadius: 0,
               borderWidth: 1,
-              borderColor: ["#4DB8D1"],
+              borderColor: ["#388697"],
               fill: false
             }
           ]
@@ -115,7 +120,9 @@ export default {
               pointBorderWidth: 0,
               pointRadius: 0,
               borderColor: ["black"],
-              borderWidth: 2
+              borderWidth: 2,
+              fill: true,
+              backgroundColor: "rgba(0,0,0,0.05)"
             },
             {
               data: [80],
@@ -238,7 +245,12 @@ export default {
       return myEmot2;
     },
     testScore() {
-      return 100 / ((this.testEmot1 + this.testEmot2) / this.testEmot1);
+      let myScore = 100 / ((this.testEmot1 + this.testEmot2) / this.testEmot1);
+      if (isNaN(myScore)) {
+        return 50;
+      } else {
+        return myScore;
+      }
     },
     testScoreEmot() {
       if (this.testScore >= 85) {
@@ -264,7 +276,9 @@ export default {
     this.updateDays();
   },
   updated() {
-    this.updateCharts();
+    if (this.storedData) {
+      this.updateCharts();
+    }
   }
 };
 </script>
@@ -327,8 +341,8 @@ export default {
 
 .score-bar .happy,
 .score-bar .sad {
-  width: 2px;
-  height: 45px;
+  width: 3px;
+  height: 62px;
   margin-left: 1px;
   padding: 0;
   list-style: none;

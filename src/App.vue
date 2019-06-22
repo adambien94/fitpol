@@ -1,11 +1,12 @@
 <template>
   <div id="app">
+    <!-- <button @click="fun()">click</button> -->
     <app-header v-on:slideCarousel="slideComp($event)" v-on:slideHam="slideHamMenu($event)"></app-header>
     <div class="ham-container">
       <app-menu v-on:slideHam2="personalToggle($event)" v-on:slideHam="slideHamMenu($event)"></app-menu>
     </div>
     <app-personal
-      v-if="personalShow"
+      v-show="personalShow"
       v-on:slideHam2="personalToggle($event)"
       v-on:slideHam="slideHamMenu($event)"
     ></app-personal>
@@ -14,15 +15,14 @@
       v-touch:swipe.left="swipeContainerLeft"
       v-touch:swipe.right="swipeContainerRight"
     >
-      <app-list></app-list>
-      <app-analysis></app-analysis>
-      <app-chart v-bind:ranChart="ranChart"></app-chart>
+      <app-list :storedData="storedData"></app-list>
+      <app-analysis :blankInfo="blankInfo" :storedData="storedData"></app-analysis>
+      <app-chart :ranChart="ranChart" :blankInfo="blankInfo" :storedData="storedData"></app-chart>
       <app-stats></app-stats>
       <transition name="v">
         <div v-if="show" class="blackout" v-on:click="slideHamMenu()"></div>
       </transition>
     </div>
-    <!-- <router-view v-bind:dataArr="dataArr"></router-view> -->
   </div>
 </template>
 
@@ -55,10 +55,15 @@ export default {
       show: false,
       personalShow: false,
       currentSlide: 0,
-      ranChart: false
+      ranChart: false,
+      blankInfo: "brak danych 🤷‍♂️",
+      storedData: null
     };
   },
   methods: {
+    fun() {
+      alert(this.noData);
+    },
     updateApp(arg) {
       alert(arg);
     },
@@ -74,7 +79,9 @@ export default {
     },
     updateChartComp(indexOfComp) {
       if (indexOfComp === 2) {
-        this.ranChart = true;
+        if (this.storedData) {
+          this.ranChart = true;
+        }
       }
     },
     slideHamMenu() {
@@ -106,7 +113,21 @@ export default {
   computed: {
     dataArr() {
       return this.$store.state.dataArr;
+    },
+    personalInfo() {
+      return this.$store.state.personalInfo;
+    },
+    noData() {
+      return this.$store.getters.noData;
     }
+  },
+  watch: {
+    noData() {
+      this.storedData = !this.noData;
+    }
+  },
+  created() {
+    this.storedData = !this.noData;
   }
 };
 </script>
@@ -140,7 +161,6 @@ body {
 }
 
 .ham-container {
-  z-index: 25;
   background: #fff;
   width: 80%;
   height: 100%;
@@ -174,6 +194,13 @@ body {
   height: 150%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 4;
+}
+
+.no-data-info {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .v-enter {
