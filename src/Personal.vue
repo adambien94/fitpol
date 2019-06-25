@@ -1,28 +1,29 @@
 <template>
   <div id="personal" v-touch:swipe.left="slideHam" v-touch:swipe.right="slideHam2">
-    <div class="grey">
-      <div class="back-arrow" v-on:click="slideHam2"></div>
+    <div class="bar">
+      <div class="bar__back-arrow" v-on:click="slideHam2"></div>
+      <h2 class="bar__title">Personalizuj</h2>
     </div>
     <div class="input-box">
       <form id="my-form">
         <div class="input-box__item">
-          <label class="input-box__label" for>Wiek:</label>
+          <label class="input-box__label" for>Wiek</label>
           <input class="input-box__input" type="number" placeholder="-" v-model="age">
         </div>
         <div class="input-box__item">
-          <label class="input-box__label" for>Wzrost:</label>
+          <label class="input-box__label" for>Wzrost</label>
           <input class="input-box__input" type="number" placeholder="cm" v-model="height">
         </div>
         <div class="input-box__item">
-          <label class="input-box__label" for>Płeć:</label>
+          <label class="input-box__label" for>Płeć</label>
           <input class="input-box__input" type="text" placeholder="M / K" v-model="sex">
         </div>
         <div class="input-box__item">
-          <label class="input-box__label" for>Cel:</label>
+          <label class="input-box__label" for>Cel</label>
           <input class="input-box__input" type="number" placeholder="kg" v-model="weightGoal">
         </div>
         <div class="input-box__item">
-          <label class="input-box__label" for>Aktywność:</label>
+          <label class="input-box__label" for>Aktywność</label>
           <select name class="input-box__select" v-model="activity">
             <option value="1.2">brak aktywności, praca siedząca</option>
             <option value="1.35">praca siedząca, 1-2 treningi w tygodniu</option>
@@ -139,11 +140,83 @@ export default {
 .input-box {
   width: 100%;
   z-index: 5;
-  border-radius: 3px;
   overflow: hidden;
 }
 
-.input-box__title {
+.bar__title {
+  position: relative;
+  padding: 0;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+  top: 14px;
+  padding: 0 14px;
+}
+
+.input-box form {
+  padding: 20px 0px;
+}
+
+.input-box__item {
+  /* font-weight: 500; */
+}
+
+.input-box__input {
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  line-height: 48px;
+  border-radius: 2px;
+  padding-left: 20px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.input-box__input[type="text"] {
+  text-transform: capitalize;
+}
+
+.input-box__select {
+  border: none;
+  width: 100%;
+  padding: 0 16px;
+  color: rgba(0, 0, 0, 0.4);
+  height: 48px;
+  line-height: 22px;
+  font-size: 17px;
+  background: #fff;
+}
+
+.input-box__label {
+  font-size: 15px;
+  font-weight: 400;
+  display: block;
+  line-height: 32px;
+  padding: 8px 0 0 20px;
+  background: #ededed;
+}
+
+.personal__set-btn {
+  background: #388697;
+  color: white;
+  text-transform: capitalize;
+  width: 157px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: bold;
+  float: right;
+  margin: 10px 30px;
+}
+
+/* .input-box {
+  width: 100%;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.bar__title {
   color: black;
   font-size: 24px;
   font-weight: bold;
@@ -192,7 +265,6 @@ export default {
 .input-box__label {
   font-size: 20px;
   line-height: 36px;
-  /* font-weight: 400; */
 }
 
 .personal__set-btn {
@@ -208,19 +280,19 @@ export default {
   font-weight: bold;
   float: right;
   margin: 0 30px;
-}
+} 
 
 .clearfix {
   clear: both;
-}
+}*/
 
-.grey {
-  /* background: #ededed; */
+.bar {
   height: 50px;
   margin-bottom: 10px;
+  display: flex;
 }
 
-.back-arrow {
+.bar__back-arrow {
   background: url("./img/keyboard-left-arrow-button.png");
   background-size: cover;
   height: 20px;

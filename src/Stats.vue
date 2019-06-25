@@ -17,7 +17,7 @@
       </ul>
     </div>
 
-    <transition name="v">
+    <transition name="input-box-transition">
       <div v-if="show" class="input-box">
         <h2 class="input-box__title">Menu - {{days[dayIndex]}}</h2>
         <span></span>
@@ -37,7 +37,7 @@
         </div>
       </div>
     </transition>
-    <transition name="v">
+    <transition name="blackout-transition">
       <div v-if="show" class="blackout"></div>
     </transition>
   </div>

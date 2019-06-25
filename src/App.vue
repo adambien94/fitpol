@@ -19,13 +19,12 @@
       <app-analysis :blankInfo="blankInfo" :storedData="storedData"></app-analysis>
       <app-chart :ranChart="ranChart" :blankInfo="blankInfo" :storedData="storedData"></app-chart>
       <app-stats></app-stats>
-      <transition name="v">
-        <div v-if="show" class="blackout" v-on:click="slideHamMenu()"></div>
+      <transition name="blackout-transition">
+        <div v-show="show" class="blackout" v-on:click="slideHamMenu()"></div>
       </transition>
     </div>
   </div>
 </template>
-
 
 
 <script>
@@ -162,13 +161,13 @@ body {
 
 .ham-container {
   background: #fff;
-  width: 80%;
+  width: 75%;
   height: 100%;
   position: absolute;
   z-index: 10;
   top: 0;
-  left: -80%;
-  transition: transform 0.225s;
+  left: -75%;
+  transition: transform 0.2s ease-out;
   overflow: hidden;
 }
 
@@ -203,20 +202,37 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.v-enter {
+.input-box-transition-enter {
   opacity: 0;
 }
 
-.v-enter-active {
-  transition: opacity 0.2s;
+.input-box-transition-enter-active {
+  transition: opacity 0.18s;
 }
 
-.v-leave {
+.input-box-transition-leave {
   opacity: 1;
 }
 
-.v-leave-active {
-  transition: opacity 0.2s;
+.input-box-transition-leave-active {
+  transition: opacity 0.18s;
+  opacity: 0;
+}
+
+.blackout-transition-enter {
+  opacity: 0;
+}
+
+.blackout-transition-enter-active {
+  transition: opacity 0.18s;
+}
+
+.blackout-transition-leave {
+  opacity: 1;
+}
+
+.blackout-transition-leave-active {
+  transition: opacity 0.18s;
   opacity: 0;
 }
 
@@ -233,7 +249,7 @@ body {
 
 @media (min-width: 600px) and (max-width: 1499px) {
   #app {
-    width: 340px;
+    width: 360px;
     margin: 14px auto;
   }
 

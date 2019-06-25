@@ -73,10 +73,8 @@ export default {
 <style scoped>
 .main-nav {
   width: 100%;
-  /* position: fixed; */
   z-index: 0;
   width: 100%;
-  /* box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.2); */
 }
 .menu {
   position: relative;
@@ -100,7 +98,6 @@ export default {
 .top-nav__ham,
 .top-nav__search,
 .top-nav__options {
-  background: gray;
   width: 28px;
   height: 28px;
   cursor: pointer;
@@ -116,14 +113,13 @@ export default {
 .top-nav__search {
   background: url("./img/baseline_search_black_24dp.png");
   background-size: cover;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .top-nav__options {
   background: url("./img/baseline_more_vert_black_24dp.png");
   background-size: cover;
   margin-left: 10px;
-  /* opacity: 0.5; */
 }
 
 .bottom-nav {
@@ -167,19 +163,18 @@ export default {
   width: 230px;
   background: #fff;
   border-radius: 6px;
-  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.2);
   top: 10px;
   right: 10px;
 }
 
 .option-window__list {
-  /* margin-top: 20px; */
   padding: 14px;
   display: inline-block;
 }
 
 .option-window__item {
-  font-size: 17px;
+  font-size: 16px;
   padding: 10px 0;
   list-style: none;
   width: auto;
@@ -234,7 +229,7 @@ export default {
 }
 
 .option-window-transition-enter-active {
-  animation: bounce 0.3s;
+  animation: bounce 0.35s;
 }
 
 .option-window-transition-leave-active {
@@ -242,21 +237,4 @@ export default {
   transform: translate(57px, -37px) scale(0.5);
   opacity: 0;
 }
-
-/* .v-enter {
-  opacity: 0;
-}
-
-.v-enter-active {
-  transition: opacity 0.2s;
-}
-
-.v-leave {
-  opacity: 1;
-}
-
-.v-leave-active {
-  transition: opacity 0.2s;
-  opacity: 0;
-} */
 </style>

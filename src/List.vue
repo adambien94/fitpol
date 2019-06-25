@@ -15,8 +15,8 @@
         <span class="data__item__col note">{{data.note}}</span>
       </li>
     </ul>
-    <transition name="v">
-      <div v-if="show" class="input-box">
+    <transition name="input-box-transition">
+      <div v-show="show" class="input-box">
         <h2 class="input-box__title">Dzień {{index + 1}}</h2>
         <form id="my-form">
           <div class="input-box__item">
@@ -43,15 +43,15 @@
           <div class="clearfix"></div>
         </form>
         <div class="input-box__buttons">
-          <button class="input-box__btn" v-on:click="showToggle(); clearData()">anuluj</button>
+          <button class="input-box__btn" v-on:click="cancelShowToggle(); clearData()">anuluj</button>
           <button class="input-box__btn" v-on:click="addData()">ok</button>
         </div>
       </div>
     </transition>
-    <transition name="v">
+    <transition name="blackout-transition">
       <div v-if="show" class="blackout"></div>
     </transition>
-    <div v-on:click="show = !show" class="input-btn">
+    <div v-on:click="showToggle()" class="input-btn">
       <img src="./img/sharp_create_white_24dp.png" alt>
     </div>
   </div>
@@ -77,8 +77,14 @@ export default {
   },
   methods: {
     showToggle() {
+      this.scrollTop();
       this.show = !this.show;
-      this.index = this.dataArr.length;
+    },
+    cancelShowToggle() {
+      this.show = !this.show;
+      setTimeout(() => {
+        this.index = this.dataArr.length;
+      }, 250);
     },
     addData() {
       if (this.noData && (this.weight === "" || this.note === "")) {
@@ -120,6 +126,12 @@ export default {
         document.getElementById("my-form").reset();
         // LOCAL STORAGE test
         localStorage.setItem("mojeDane", JSON.stringify(this.dataArr));
+      }
+    },
+    scrollTop() {
+      const dataList = document.querySelector(".data");
+      if (dataList.scrollTop > 0) {
+        dataList.scrollTop = 0;
       }
     },
     editData(data) {
@@ -261,7 +273,6 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .data__item .emot {
@@ -274,6 +285,7 @@ export default {
   width: 100%;
   height: calc(100% - 48px);
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .emot {

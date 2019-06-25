@@ -71,9 +71,9 @@ export default {
               pointHoverBorderColor: "#D81159",
               pointRadius: 0,
               borderColor: ["#D81159"],
-              borderWidth: 2,
+              borderWidth: 1.5,
               fill: true,
-              backgroundColor: "rgba(216, 17, 89,0.05)"
+              backgroundColor: "rgba(216, 17, 89,0.04)"
             },
             {
               data: this.weightGoalArr,
@@ -120,9 +120,9 @@ export default {
               pointBorderWidth: 0,
               pointRadius: 0,
               borderColor: ["black"],
-              borderWidth: 2,
+              borderWidth: 1.5,
               fill: true,
-              backgroundColor: "rgba(0,0,0,0.05)"
+              backgroundColor: "rgba(0,0,0,0.04)"
             },
             {
               data: [80],

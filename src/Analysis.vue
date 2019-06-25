@@ -186,6 +186,7 @@ export default {
   display: block;
   text-align: center;
   color: #000;
+  /* font-size: 17px; */
 }
 
 .info__span {
