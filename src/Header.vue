@@ -44,9 +44,7 @@ export default {
       const activeBorder = document.querySelector(".active-border");
       setTimeout(() => {
         activeBorder.style.transform =
-          "translateX(" +
-          indexOfOption * activeBorder.getBoundingClientRect().width +
-          "px)";
+          "translateX(" + indexOfOption * 100 + "%)";
       }, 0);
       this.$emit("slideCarousel", indexOfOption);
     },
@@ -75,7 +73,9 @@ export default {
   width: 100%;
   z-index: 0;
   width: 100%;
+  background: #ededed;
 }
+
 .menu {
   position: relative;
 }
@@ -152,7 +152,6 @@ export default {
   height: 48px;
   width: 25%;
   background: rgba(0, 0, 0, 0.1);
-  z-index: 4;
   bottom: 0px;
   transition: transform 0.225s;
 }

@@ -8,19 +8,30 @@
       <form id="my-form">
         <div class="input-box__item">
           <label class="input-box__label" for>Wiek</label>
-          <input class="input-box__input" type="number" placeholder="-" v-model="age">
+          <input class="input-box__input" type="number" placeholder="-" v-model="age" required />
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Wzrost</label>
-          <input class="input-box__input" type="number" placeholder="cm" v-model="height">
+          <input class="input-box__input" type="number" placeholder="cm" v-model="height" required />
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Płeć</label>
-          <input class="input-box__input" type="text" placeholder="M / K" v-model="sex">
+          <input type="radio" name="gender" value="male" id="maleId" /> Mężczyzna
+          <br />
+          <input type="radio" name="gender" value="female" id="femaleId" /> Kobieta
+          <br />
+
+          <!-- <input class="input-box__input" type="text" placeholder="M / K" v-model="sex" required> -->
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Cel</label>
-          <input class="input-box__input" type="number" placeholder="kg" v-model="weightGoal">
+          <input
+            class="input-box__input"
+            type="number"
+            placeholder="kg"
+            v-model="weightGoal"
+            required
+          />
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Aktywność</label>
@@ -32,9 +43,8 @@
             <option value="2">zawodowy sportowiec, osoba codziennie trenująca</option>
           </select>
         </div>
-        <div class="clearfix"></div>
+        <button v-on:click="setData()" class="input-box__submit-btn" type="submit">Ustaw</button>
       </form>
-      <button v-on:click="setData(); slideHam2()" class="personal__set-btn">Ustaw</button>
     </div>
   </div>
 </template>
@@ -53,8 +63,6 @@ export default {
     storeAge() {
       if (isNaN(this.age)) {
         alert("błędne dane");
-      } else if (this.age === null) {
-        console.log("age is null");
       } else {
         this.$store.commit("storeAge", this.age);
       }
@@ -62,26 +70,22 @@ export default {
     storeHeight() {
       if (isNaN(this.height)) {
         alert("błędne dane");
-      } else if (this.height === null) {
-        console.log("height is null");
       } else {
         this.$store.commit("storeHeight", this.height);
       }
     },
     storeSex() {
-      if (!isNaN(this.sex)) {
-        alert("błędne danee");
-      } else if (this.sex === null) {
-        console.log("sex is null");
+      var male = document.getElementById("maleId");
+      if (male.checked === true) {
+        this.sex = "M";
       } else {
-        this.$store.commit("storeSex", this.sex);
+        this.sex = "K";
       }
+      this.$store.commit("storeSex", this.sex);
     },
     storeWeightGoal() {
       if (isNaN(this.weightGoal)) {
         alert("błędne danexe");
-      } else if (this.weightGoal === null) {
-        console.log("weightGoal is null");
       } else {
         console.log("weightGoal poszlo");
         this.$store.commit("storeWeightGoal", this.weightGoal);
@@ -91,16 +95,19 @@ export default {
       if (this.activity === null) {
         this.activity = 1.2;
       } else {
-        this.$store.commit("storeActivity", parseFloat(this.activity));
+        let parsedActivity = parseFloat(this.activity);
+        this.$store.commit("storeActivity", parsedActivity);
       }
     },
     setData() {
       this.storeAge();
       this.storeHeight();
       this.storeSex();
-      this.storeActivity();
       this.storeWeightGoal();
+      this.storeActivity();
       localStorage.setItem("mojeInfo", JSON.stringify(this.personalInfo));
+      // console.log("KKKK");
+      // location.reload();
     },
     updateInfo() {
       this.$store.commit("updateInfo");
@@ -110,6 +117,15 @@ export default {
     },
     slideHam() {
       this.$emit("slideHam");
+    },
+    updateSexInput() {
+      var male = document.getElementById("maleId");
+      var female = document.getElementById("femaleId");
+      if (this.sex === "K") {
+        female.checked = true;
+      } else {
+        male.checked = true;
+      }
     }
   },
   computed: {
@@ -123,6 +139,10 @@ export default {
     this.height = this.personalInfo.height;
     this.sex = this.personalInfo.sex;
     this.weightGoal = this.personalInfo.weightGoal;
+    this.activity = this.personalInfo.activity;
+  },
+  mounted() {
+    this.updateSexInput();
   }
 };
 </script>
@@ -158,6 +178,7 @@ export default {
 }
 
 .input-box__item {
+  color: rgba(0, 0, 0, 0.5);
   /* font-weight: 500; */
 }
 
@@ -168,7 +189,7 @@ export default {
   line-height: 48px;
   border-radius: 2px;
   padding-left: 20px;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .input-box__input[type="text"] {
@@ -179,7 +200,7 @@ export default {
   border: none;
   width: 100%;
   padding: 0 16px;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.5);
   height: 48px;
   line-height: 22px;
   font-size: 17px;
@@ -187,15 +208,17 @@ export default {
 }
 
 .input-box__label {
+  color: #000;
   font-size: 15px;
   font-weight: 400;
   display: block;
-  line-height: 32px;
-  padding: 8px 0 0 20px;
-  background: #ededed;
+  line-height: 28px;
+  padding: 12px 0 0 20px;
+  /* background: #ededed; */
+  background: rgba(0, 0, 0, 0.05);
 }
 
-.personal__set-btn {
+.input-box__submit-btn {
   background: #388697;
   color: white;
   text-transform: capitalize;
@@ -207,7 +230,11 @@ export default {
   font-size: 18px;
   font-weight: bold;
   float: right;
-  margin: 10px 30px;
+  margin: 40px 20px;
+}
+
+input[type="radio"] {
+  margin: 17px 20px;
 }
 
 /* .input-box {
@@ -267,7 +294,7 @@ export default {
   line-height: 36px;
 }
 
-.personal__set-btn {
+.input-box__submit-btn {
   background: #388697;
   color: white;
   text-transform: capitalize;

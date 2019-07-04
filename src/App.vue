@@ -60,9 +60,6 @@ export default {
     };
   },
   methods: {
-    fun() {
-      alert(this.noData);
-    },
     updateApp(arg) {
       alert(arg);
     },
@@ -71,7 +68,7 @@ export default {
       const appWidth = document.querySelector("#app").getBoundingClientRect()
         .width;
       setTimeout(() => {
-        carousel.style.transform = "translateX(-" + arg * appWidth + "px)";
+        carousel.style.transform = "translateX(-" + arg * 25 + "%)";
       }, 0);
       this.currentSlide = arg;
       this.updateChartComp(arg);
@@ -87,10 +84,10 @@ export default {
       this.show = !this.show;
       const hamMenu = document.querySelector(".ham-container");
       if (this.show) {
-        hamMenu.style.transform = "translateX(100%)";
+        hamMenu.style.transform = "translateX(0)";
         hamMenu.style.boxShadow = "0px 3px 16px 2px rgba(0, 0, 0, 0.2)";
       } else {
-        hamMenu.style.transform = "translateX(-50px)";
+        hamMenu.style.transform = "translateX(-100%)";
         hamMenu.style.boxShadow = "none";
       }
     },
@@ -146,7 +143,9 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  background: rgba(0, 0, 0, 0.8);
+  height: 750px;
+  background: linear-gradient(#fff, #ededed);
+  position: relative;
 }
 
 #app {
@@ -166,7 +165,8 @@ body {
   position: absolute;
   z-index: 10;
   top: 0;
-  left: -75%;
+  left: 0;
+  transform: translateX(-100%);
   transition: transform 0.2s ease-out;
   overflow: hidden;
 }
@@ -190,7 +190,7 @@ body {
   position: absolute;
   top: -96px;
   width: 100%;
-  height: 150%;
+  height: calc(100% + 96px);
   background: rgba(0, 0, 0, 0.4);
   z-index: 4;
 }
@@ -236,25 +236,63 @@ body {
   opacity: 0;
 }
 
-@media (min-width: 1500px) {
+/* @media (min-width: 1500px) {
   #app {
-    width: 420px;
+    width: 390px;
+    height: 85vh;
     margin: 50px auto;
   }
 
   .carousel-container {
-    height: calc(82vh);
+    height: calc(100% - 96px);
   }
-}
+} */
 
-@media (min-width: 600px) and (max-width: 1499px) {
-  #app {
-    width: 360px;
-    margin: 14px auto;
+@media (min-width: 600px) {
+  body:before,
+  body:after {
+    content: "";
+    position: absolute;
+    width: 340px;
+    height: 680px;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 28px);
   }
+
+  body:after {
+    background: #ededed;
+    z-index: -50;
+    border-radius: 50px;
+    transform: translate(-50%, 30px) scale(0.95);
+  }
+
+  body:before {
+    background: url("./img/IphoneX.png");
+    background-size: cover;
+    z-index: -49;
+  }
+
+  #app {
+    width: 364px;
+    height: 730px;
+    margin: 0px auto;
+    transform: scale(0.8);
+  }
+
+  /* #app:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 10px solid red;
+    top: -10px;
+    left: -10px;
+    overflow: hidden;
+  } */
 
   .carousel-container {
-    height: calc(95vh - 96px);
+    height: calc(100% - 96px);
   }
 }
 </style>

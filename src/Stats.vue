@@ -28,7 +28,7 @@
               type="text"
               v-model="mealInputs[mealInputsIndex]"
               :placeholder="'posiłek ' + (mealInputsIndex + 1)"
-            >
+            />
           </div>
         </form>
         <div class="input-box__buttons">
@@ -250,13 +250,14 @@ export default {
 .input-box__label {
   font-size: 15px;
   line-height: 36px;
-  padding-left: 25px;
+  padding-left: 20px;
 }
 
 .input-box__buttons {
   display: flex;
   /* background: #ededed; */
   padding: 3px;
+  margin-top: 18px;
 }
 
 .input-box__btn {

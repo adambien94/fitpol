@@ -1,69 +1,71 @@
 <template>
   <div id="analysis">
-    <span class="no-data-info" v-if="!storedData">{{blankInfo}}</span>
-    <div class="container" v-if="storedData">
-      <div class="info">
-        <div class="info__item">
-          <span class="info__label">Wiek</span>
-          <span class="info__span">{{age}}</span>
+    <div class="scroll-container">
+      <span class="no-data-info" v-if="!storedData">{{blankInfo}}</span>
+      <div class="container" v-if="storedData">
+        <div class="info">
+          <div class="info__item">
+            <span class="info__label">Wiek</span>
+            <span class="info__span">{{age}}</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">Wzrost</span>
+            <span class="info__span">{{height}}</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">Waga</span>
+            <span class="info__span">{{lastWeight}}</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">Płeć</span>
+            <span class="info__span">{{sex}}</span>
+          </div>
         </div>
-        <div class="info__item">
-          <span class="info__label">Wzrost</span>
-          <span class="info__span">{{height}}</span>
-        </div>
-        <div class="info__item">
-          <span class="info__label">Waga</span>
-          <span class="info__span">{{lastWeight}}</span>
-        </div>
-        <div class="info__item">
-          <span class="info__label">Płeć</span>
-          <span class="info__span">{{sex}}</span>
-        </div>
-      </div>
 
-      <div class="calculator">
-        <div class="calculator__item">
-          <span class="calculator__label">BMI (wskaźnik masy ciała)</span>
-          <span class="calculator__span">
-            {{bmi}}
-            <span class="gray-span">{{status}}</span>
-            <span class="emot-span">{{statusEmot}}</span>
-          </span>
-        </div>
-        <div class="calculator__item">
-          <span class="calculator__label">BMR (podst. przemiana materii)</span>
-          <span class="calculator__span">
-            {{bmr}}
-            <span class="gray-span">kcal</span>
-          </span>
-        </div>
-        <div class="calculator__item">
-          <span class="calculator__label">CPM (dzienne zapotrzebowanie kaloryczne)</span>
-          <span class="calculator__span">
-            {{cpm}}
-            <span class="gray-span">kcal</span>
-          </span>
-        </div>
-        <div class="calculator__item">
-          <span class="calculator__label">Zapotrzebowanie na przybranie wagi</span>
-          <span class="calculator__span">
-            {{(cpm * 1) + 250}}
-            <span class="gray-span">kcal</span>
-          </span>
-        </div>
-        <div class="calculator__item">
-          <span class="calculator__label">Zapotrzebowanie na utratę wagi</span>
-          <span class="calculator__span">
-            {{(cpm * 1) - 200}}
-            <span class="gray-span">kcal</span>
-          </span>
-        </div>
-        <div class="calculator__item">
-          <span class="calculator__label">Lorem ipsum (coś tu będzie)</span>
-          <span class="calculator__span">
-            3021
-            <span class="gray-span">wynik</span>
-          </span>
+        <div class="calculator">
+          <div class="calculator__item">
+            <span class="calculator__label">BMI (wskaźnik masy ciała)</span>
+            <span class="calculator__span">
+              {{bmi}}
+              <span class="gray-span">{{status}}</span>
+              <span class="emot-span">{{statusEmot}}</span>
+            </span>
+          </div>
+          <div class="calculator__item">
+            <span class="calculator__label">BMR (podst. przemiana materii)</span>
+            <span class="calculator__span">
+              {{bmr}}
+              <span class="gray-span">kcal</span>
+            </span>
+          </div>
+          <div class="calculator__item">
+            <span class="calculator__label">CPM (dzienne zapotrzebowanie kaloryczne)</span>
+            <span class="calculator__span">
+              {{cpm}}
+              <span class="gray-span">kcal</span>
+            </span>
+          </div>
+          <div class="calculator__item">
+            <span class="calculator__label">Zapotrzebowanie na przybranie wagi</span>
+            <span class="calculator__span">
+              {{(cpm * 1) + 250}}
+              <span class="gray-span">kcal</span>
+            </span>
+          </div>
+          <div class="calculator__item">
+            <span class="calculator__label">Zapotrzebowanie na utratę wagi</span>
+            <span class="calculator__span">
+              {{(cpm * 1) - 200}}
+              <span class="gray-span">kcal</span>
+            </span>
+          </div>
+          <div class="calculator__item">
+            <span class="calculator__label">Lorem ipsum (coś tu będzie)</span>
+            <span class="calculator__span">
+              3021
+              <span class="gray-span">wynik</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -166,6 +168,7 @@ export default {
   z-index: 2;
   background: #fff;
   position: relative;
+  overflow: hidden;
 }
 .info {
   display: flex;
@@ -209,11 +212,16 @@ export default {
 
 .calculator__label {
   font-weight: 500;
+  /* background: rgba(0, 0, 0, 0.05); */
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  line-height: 28px;
+  /* padding: 12px 0 0 15px; */
 }
 
 .calculator__span {
+  /* line-height: 48px; */
   color: #d81159;
-  font-size: 20px;
+  font-size: 19px;
   padding-top: 0px;
   font-weight: 400;
 }
@@ -221,10 +229,29 @@ export default {
 .gray-span {
   color: black;
   font-weight: 400;
-  /* color: rgba(0, 0, 0, 0.5); */
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.5);
+  /* color: #d81159; */
 }
 
 .emot-span {
   font-size: 16px;
+}
+
+.scroll-container {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 500px) {
+  .scroll-container {
+    position: absolute;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -17px;
+  }
 }
 </style>

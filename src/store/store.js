@@ -193,7 +193,7 @@ export const store = new Vuex.Store({
       age: 23,
       height: 183,
       sex: "M",
-      activity: 2,
+      activity: 1.2,
       weightGoal: 76
     },
     meals: [

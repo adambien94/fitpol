@@ -21,7 +21,7 @@
         <form id="my-form">
           <div class="input-box__item">
             <label class="input-box__label" for>Data:</label>
-            <input class="input-box__input" type="text" :placeholder="currentDate" v-model="date">
+            <input class="input-box__input" type="text" :placeholder="currentDate" disabled>
           </div>
           <div class="input-box__item">
             <label class="input-box__label" for>Waga:</label>
@@ -383,6 +383,10 @@ export default {
   line-height: 36px;
   border-radius: 2px;
   text-align: center;
+}
+
+.input-box__input[type="text"]:disabled {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .input-box__select {
