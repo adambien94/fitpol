@@ -24,6 +24,8 @@
           <li class="option-window__item" @click="resetData()">Reset</li>
           <li class="option-window__item" @click="defaultData()">Przykładowe dane</li>
           <li class="option-window__item">Info</li>
+          <li class="option-window__item">Wyloguj</li>
+          <li class="option-window__item">Usuń konto</li>
         </ul>
       </div>
     </transition>
@@ -42,10 +44,7 @@ export default {
   methods: {
     slideCarousel(indexOfOption) {
       const activeBorder = document.querySelector(".active-border");
-      setTimeout(() => {
-        activeBorder.style.transform =
-          "translateX(" + indexOfOption * 100 + "%)";
-      }, 0);
+      activeBorder.style.transform = "translateX(" + indexOfOption * 100 + "%)";
       this.$emit("slideCarousel", indexOfOption);
     },
     slideHam() {
@@ -179,29 +178,11 @@ export default {
   width: auto;
 }
 
-.option-window__item:nth-child(3) {
+.option-window__item:nth-child(3),
+.option-window__item:nth-child(4),
+.option-window__item:nth-child(5) {
   opacity: 0.4;
 }
-
-/* .option-window-transition-enter {
-  transform: translate(57px, -37px) scale(0.5);
-  opacity: 0;
-}
-
-.option-window-transition-enter-active {
-  transition: transform 0.2s, opacity 0.2s;
-}
-
-.option-window-transition-leave {
-  transform: translate(0) scale(1);
-  opacity: 1;
-}
-
-.option-window-transition-leave-active {
-  transition: transform 0.2s, opacity 0.2s;
-  transform: translate(57px, -37px) scale(0.5);
-  opacity: 0;
-} */
 
 .transparent-cover {
   position: absolute;
@@ -214,21 +195,17 @@ export default {
 
 @keyframes bounce {
   0% {
-    transform: translate(57px, -37px) scale(0.5);
+    transform: translate(57px, -37px) scaleY(0.5);
     opacity: 0;
   }
-  50% {
-    transform: translate(0, 2px) scale(1.04);
-    opacity: 1;
-  }
   100% {
-    transform: translate(0) scale(1);
+    transform: translate(0) scaleY(1);
     opacity: 1;
   }
 }
 
 .option-window-transition-enter-active {
-  animation: bounce 0.35s;
+  animation: bounce 0.2s;
 }
 
 .option-window-transition-leave-active {

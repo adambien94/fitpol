@@ -63,15 +63,13 @@ export default {
     updateApp(arg) {
       alert(arg);
     },
-    slideComp(arg) {
+    slideComp(indexOfComp) {
       const carousel = document.querySelector(".carousel-container");
-      const appWidth = document.querySelector("#app").getBoundingClientRect()
-        .width;
-      setTimeout(() => {
-        carousel.style.transform = "translateX(-" + arg * 25 + "%)";
-      }, 0);
-      this.currentSlide = arg;
-      this.updateChartComp(arg);
+      // const appWidth = document.querySelector("#app").getBoundingClientRect()
+      //   .width;
+      carousel.style.transform = "translateX(-" + indexOfComp * 25 + "%)";
+      this.currentSlide = indexOfComp;
+      this.updateChartComp(indexOfComp);
     },
     updateChartComp(indexOfComp) {
       if (indexOfComp === 2) {
@@ -143,8 +141,9 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  height: 750px;
-  background: linear-gradient(#fff, #ededed);
+  height: 800px;
+  min-height: 100vh;
+  background: linear-gradient(#fff, rgba(0, 0, 0, 0.1));
   position: relative;
 }
 

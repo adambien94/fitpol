@@ -7,7 +7,7 @@
       <div class="chart-container">
         <span class="chart-label">Waga</span>
         <span class="chart-info">({{parseFloat(lostWeight).toFixed(1)}}kg)</span>
-        <span class="chart-day">Dzień {{testWeight.length}}</span>
+        <span class="chart-day">Dzień {{weight.length}}</span>
         <canvas id="my-chart-1"></canvas>
       </div>
       <!-- wykres pas -->
@@ -36,16 +36,13 @@ export default {
   props: ["ranChart", "blankInfo", "storedData"],
   data() {
     return {
-      weight: [],
       goal: 75,
       weightGoalArr: [],
-      waist: [],
-      period: 20,
       days: [],
       test: [10, 9, 8, 7, 3, 2],
       emots: [],
-      emot1: 0,
-      emot2: 0,
+      happy: 0,
+      sad: 0,
       score: 0
     };
   },
@@ -63,7 +60,7 @@ export default {
           datasets: [
             {
               label: "",
-              data: this.testWeight,
+              data: this.weight,
               fill: false,
               tension: 0.1,
               pointBorderWidth: 0,
@@ -114,7 +111,7 @@ export default {
           datasets: [
             {
               label: "",
-              data: this.testWaist,
+              data: this.waist,
               fill: false,
               tension: 0.1,
               pointBorderWidth: 0,
@@ -150,6 +147,7 @@ export default {
       });
     },
     updateDays() {
+      this.days = [];
       for (let i = 0; i < this.period; i++) {
         this.days.push(i + 1);
       }
@@ -160,16 +158,6 @@ export default {
         this.weightGoalArr.push(this.weightGoal);
       }
     }
-    // updateScore() {
-    //   this.score = 100 / ((this.emot1 + this.emot2) / this.emot1);
-    //   if (this.score >= 70) {
-    //     this.scoreEmot = "😋";
-    //   } else if (this.score < 70 && this.score >= 40) {
-    //     this.scoreEmot = "😐";
-    //   } else {
-    //     this.scoreEmot = "🤬";
-    //   }
-    // }
   },
   computed: {
     dataArr() {
@@ -193,7 +181,7 @@ export default {
     lostWaist() {
       return this.lastWaist - this.$store.state.dataArr[0].note;
     },
-    testWeight() {
+    weight() {
       let myWeight = [];
       for (let i = 0; i < this.$store.state.dataArr.length; i++) {
         if (this.dataArr[i].weight === "-") {
@@ -204,7 +192,7 @@ export default {
       }
       return myWeight;
     },
-    testWaist() {
+    waist() {
       let myWaist = [];
       for (let i = 0; i < this.$store.state.dataArr.length; i++) {
         if (this.dataArr[i].note === "-") {
@@ -226,26 +214,26 @@ export default {
       }
       return myEmots;
     },
-    testEmot1() {
-      let myEmot1 = 0;
+    emotHappy() {
+      let myhappy = 0;
       for (let i = 0; i < this.$store.state.dataArr.length; i++) {
         if (this.$store.state.dataArr[i].emot === "😊") {
-          myEmot1++;
+          myhappy++;
         }
       }
-      return myEmot1;
+      return myhappy;
     },
-    testEmot2() {
-      let myEmot2 = 0;
+    emotSad() {
+      let mysad = 0;
       for (let i = 0; i < this.$store.state.dataArr.length; i++) {
         if (this.$store.state.dataArr[i].emot === "😡") {
-          myEmot2++;
+          mysad++;
         }
       }
-      return myEmot2;
+      return mysad;
     },
     testScore() {
-      let myScore = 100 / ((this.testEmot1 + this.testEmot2) / this.testEmot1);
+      let myScore = 100 / ((this.emotHappy + this.emotSad) / this.emotHappy);
       if (isNaN(myScore)) {
         return 50;
       } else {
@@ -273,10 +261,14 @@ export default {
     }
   },
   mounted() {
+    this.period = this.weight.length;
+
     this.updateDays();
   },
   updated() {
+    this.period = this.weight.length;
     if (this.storedData) {
+      this.updateDays();
       this.updateCharts();
     }
   }

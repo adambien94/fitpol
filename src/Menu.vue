@@ -2,15 +2,15 @@
   <div id="menu" v-touch:swipe.left="slideHam">
     <ul class="menu__list">
       <li class="menu__item">
-        <img src="./img/settings.png" class="menu__item__img">
+        <img src="./img/settings.png" class="menu__item__img" />
         <a href="#" class="menu__link">Ustawienia</a>
       </li>
       <li class="menu__item">
-        <img src="./img/sharp_accessibility_black_24dp.png" class="menu__item__img">
+        <img src="./img/sharp_accessibility_black_24dp.png" class="menu__item__img" />
         <a href="#" class="menu__link" v-on:click="slideHam2">Personalizuj</a>
       </li>
       <li class="menu__item">
-        <img src="./img/sharp_fitness_center_black_18dp.png" class="menu__item__img">
+        <img src="./img/sharp_fitness_center_black_18dp.png" class="menu__item__img" />
         <a href="#" class="menu__link">Cel</a>
       </li>
     </ul>
@@ -26,12 +26,12 @@ export default {
       height: null,
       sex: "",
       age: null
-      // show: false
     };
   },
   methods: {
     slideHam2() {
       this.$emit("slideHam2");
+      const yolo = document.getElementById("heh");
     },
     slideHam() {
       console.log("hehe");
@@ -66,11 +66,11 @@ export default {
   width: 20px;
   position: relative;
   padding-right: 5px;
-  top: 4px;
+  top: 2px;
 }
 
 .menu__link {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: bold;
   color: #000;
   text-decoration: none;

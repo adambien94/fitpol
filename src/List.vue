@@ -21,16 +21,16 @@
         <form id="my-form">
           <div class="input-box__item">
             <label class="input-box__label" for>Data:</label>
-            <input class="input-box__input" type="text" :placeholder="currentDate" disabled>
+            <input class="input-box__input" type="text" :placeholder="currentDate" disabled />
           </div>
           <div class="input-box__item">
             <label class="input-box__label" for>Waga:</label>
-            <input class="input-box__input" type="number" placeholder="-" v-model="weight">
+            <input class="input-box__input" type="number" placeholder="-" v-model="weight" />
           </div>
 
           <div class="input-box__item">
             <label class="input-box__label" for>Pas:</label>
-            <input class="input-box__input" type="number" placeholder="-" v-model="note">
+            <input class="input-box__input" type="number" placeholder="-" v-model="note" />
           </div>
           <div class="input-box__item">
             <select name class="input-box__select" v-model="emot">
@@ -52,7 +52,7 @@
       <div v-if="show" class="blackout"></div>
     </transition>
     <div v-on:click="showToggle()" class="input-btn">
-      <img src="./img/sharp_create_white_24dp.png" alt>
+      <img src="./img/sharp_create_white_24dp.png" alt />
     </div>
   </div>
 </template>
@@ -300,10 +300,6 @@ export default {
   width: 100%;
 }
 
-.data__item:nth-child(odd) {
-  /* background: rgba(0, 0, 0, 0.02); */
-}
-
 .data__item .date {
   font-weight: 500;
 }
@@ -399,6 +395,7 @@ export default {
   line-height: 22px;
   border-radius: 2px;
   text-align: center;
+  background: rgba(0, 0, 0, 0.05);
   /* -webkit-appearance: button; */
 }
 

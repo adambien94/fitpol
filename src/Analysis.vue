@@ -229,9 +229,8 @@ export default {
 .gray-span {
   color: black;
   font-weight: 400;
-  font-size: 17px;
-  color: rgba(0, 0, 0, 0.5);
-  /* color: #d81159; */
+  font-size: 15px;
+  color: #000;
 }
 
 .emot-span {

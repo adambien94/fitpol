@@ -20,10 +20,8 @@
           <br />
           <input type="radio" name="gender" value="female" id="femaleId" /> Kobieta
           <br />
-
-          <!-- <input class="input-box__input" type="text" placeholder="M / K" v-model="sex" required> -->
         </div>
-        <div class="input-box__item">
+        <div class="input-box__item" :on="click">
           <label class="input-box__label" for>Cel</label>
           <input
             class="input-box__input"
@@ -209,8 +207,8 @@ export default {
 
 .input-box__label {
   color: #000;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 17px;
+  font-weight: 500;
   display: block;
   line-height: 28px;
   padding: 12px 0 0 20px;
