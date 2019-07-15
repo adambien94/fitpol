@@ -80,7 +80,7 @@ export default {
     },
     addMeal(dayIndex) {
       this.meals[dayIndex].push("");
-      this.mealInputs = [];
+      this.updateMealInput(dayIndex);
       for (let meal of this.meals) {
         this.mealInputs.push("");
       }
@@ -113,6 +113,7 @@ export default {
       this.dayIndex = dayIndex;
     },
     updateMealInput(dayIndex) {
+      this.mealInputs = [];
       for (let i = 0; i < this.meals[dayIndex].length; i++) {
         if (this.meals[this.dayIndex][i] === "") {
           this.mealInputs[i] = "";
@@ -264,7 +265,7 @@ export default {
 .input-box__title {
   color: black;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 28px;
   padding: 14px;
 }

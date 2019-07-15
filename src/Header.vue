@@ -3,7 +3,7 @@
     <nav class="menu">
       <div class="top-nav">
         <div class="top-nav__ham" v-on:click="slideHam"></div>
-        <span class="top-nav__title">fitpol</span>
+        <span class="top-nav__title">FitpolApp</span>
         <div class="top-nav__search"></div>
         <div class="top-nav__options" @click="optionShow = !optionShow"></div>
       </div>
@@ -91,7 +91,9 @@ export default {
   font-weight: bold;
   line-height: 32px;
   margin-left: 15px;
+  font-weight: 500;
   width: 100%;
+  letter-spacing: 1px;
 }
 
 .top-nav__ham,
@@ -135,7 +137,7 @@ export default {
 
 .bottom-nav__link {
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
   color: black;
   text-transform: capitalize;
   display: inline-block;

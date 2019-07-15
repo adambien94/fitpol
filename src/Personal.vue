@@ -166,7 +166,8 @@ export default {
   padding: 0;
   font-size: 24px;
   line-height: 24px;
-  font-weight: bold;
+  font-weight: 500;
+  letter-spacing: 1px;
   top: 14px;
   padding: 0 14px;
 }
@@ -212,7 +213,6 @@ export default {
   display: block;
   line-height: 28px;
   padding: 12px 0 0 20px;
-  /* background: #ededed; */
   background: rgba(0, 0, 0, 0.05);
 }
 
@@ -234,82 +234,6 @@ export default {
 input[type="radio"] {
   margin: 17px 20px;
 }
-
-/* .input-box {
-  width: 100%;
-  z-index: 5;
-  overflow: hidden;
-}
-
-.bar__title {
-  color: black;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 30px;
-  padding: 14px;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.03);
-}
-
-.input-box form {
-  padding: 20px 30px;
-}
-
-.input-box__item {
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-
-.input-box__input {
-  float: right;
-  width: 155px;
-  border: none;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
-  font-size: 17px;
-  line-height: 36px;
-  border-radius: 2px;
-  text-align: center;
-  color: black;
-}
-
-.input-box__input[type="text"] {
-  text-transform: capitalize;
-}
-
-.input-box__select {
-  float: right;
-  border: none;
-  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
-  font-size: 12px;
-  height: 38px;
-  display: block;
-  line-height: 22px;
-  border-radius: 2px;
-  width: 155px;
-}
-
-.input-box__label {
-  font-size: 20px;
-  line-height: 36px;
-}
-
-.input-box__submit-btn {
-  background: #388697;
-  color: white;
-  text-transform: capitalize;
-  width: 157px;
-  height: 40px;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  font-size: 18px;
-  font-weight: bold;
-  float: right;
-  margin: 0 30px;
-} 
-
-.clearfix {
-  clear: both;
-}*/
 
 .bar {
   height: 50px;

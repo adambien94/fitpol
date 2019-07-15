@@ -352,7 +352,7 @@ export default {
 .input-box__title {
   color: black;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 28px;
   padding: 14px;
   /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */

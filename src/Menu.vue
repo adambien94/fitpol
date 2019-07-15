@@ -71,7 +71,7 @@ export default {
 
 .menu__link {
   font-size: 19px;
-  font-weight: bold;
+  font-weight: 500;
   color: #000;
   text-decoration: none;
 }
