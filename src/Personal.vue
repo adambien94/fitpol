@@ -242,13 +242,17 @@ input[type="radio"] {
 }
 
 .bar__back-arrow {
-  background: url("./img/keyboard-left-arrow-button.png");
-  background-size: cover;
-  height: 20px;
-  width: 18px;
-  margin: 0 15px;
+  /* background: url("./img/keyboard-left-arrow-button.png"); */
+  /* background-size: cover; */
+  height: 16px;
+  width: 16px;
+  box-sizing: border-box;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  margin: 0 10px 0 20px;
   position: relative;
-  top: 15px;
+  transform: rotate(-45deg);
+  top: 17px;
 }
 </style>
 

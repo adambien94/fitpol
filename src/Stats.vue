@@ -80,10 +80,6 @@ export default {
     },
     addMeal(dayIndex) {
       this.meals[dayIndex].push("");
-      this.updateMealInput(dayIndex);
-      for (let meal of this.meals) {
-        this.mealInputs.push("");
-      }
       setTimeout(() => {
         this.formScroll();
       }, 50);
@@ -103,7 +99,6 @@ export default {
     },
     formScroll() {
       const form = document.querySelector(".input-box__form");
-      console.log(form.scrollHeight);
       form.scrollTop = form.scrollHeight;
     },
     showDayMenu(dayIndex) {
