@@ -3,7 +3,7 @@
     <nav class="menu">
       <div class="top-nav">
         <div class="top-nav__ham" v-on:click="slideHam"></div>
-        <span class="top-nav__title">WeightWar</span>
+        <span class="top-nav__title">fitpol</span>
         <div class="top-nav__search"></div>
         <div class="top-nav__options" @click="optionShow = !optionShow"></div>
       </div>
@@ -195,11 +195,11 @@ export default {
 
 @keyframes bounce {
   0% {
-    transform: translate(57px, -37px) scaleY(0.5);
+    transform: translate(55px, -75px) scale(0.7, 0.3);
     opacity: 0;
   }
   100% {
-    transform: translate(0) scaleY(1);
+    transform: translate(0) scale(1, 1);
     opacity: 1;
   }
 }

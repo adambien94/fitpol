@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <!-- <button @click="fun()">click</button> -->
     <app-header v-on:slideCarousel="slideComp($event)" v-on:slideHam="slideHamMenu($event)"></app-header>
     <div class="ham-container">
       <app-menu v-on:slideHam2="personalToggle($event)" v-on:slideHam="slideHamMenu($event)"></app-menu>
     </div>
-    <app-personal
-      v-show="personalShow"
-      v-on:slideHam2="personalToggle($event)"
-      v-on:slideHam="slideHamMenu($event)"
-    ></app-personal>
+    <transition name="personal-transition">
+      <app-personal
+        v-show="personalShow"
+        v-on:slideHam2="personalToggle($event)"
+        v-on:slideHam="slideHamMenu($event)"
+      ></app-personal>
+    </transition>
     <div
       class="carousel-container"
       v-touch:swipe.left="swipeContainerLeft"
@@ -60,9 +61,6 @@ export default {
     };
   },
   methods: {
-    updateApp(arg) {
-      alert(arg);
-    },
     slideComp(indexOfComp) {
       const carousel = document.querySelector(".carousel-container");
       // const appWidth = document.querySelector("#app").getBoundingClientRect()
@@ -141,8 +139,7 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  height: 800px;
-  min-height: 100vh;
+  height: 100vh;
   background: linear-gradient(#fff, rgba(0, 0, 0, 0.1));
   position: relative;
 }
@@ -177,7 +174,6 @@ body {
 }
 
 .carousel-container {
-  /* margin-top: 96px; */
   display: flex;
   width: 400%;
   background: white;
@@ -235,19 +231,32 @@ body {
   opacity: 0;
 }
 
-/* @media (min-width: 1500px) {
-  #app {
-    width: 390px;
-    height: 85vh;
-    margin: 50px auto;
+@keyframes bounce2 {
+  0% {
+    transform: translate(0) scaleY(0.975);
+    opacity: 0;
   }
+  100% {
+    transform: translate(0) scaleY(1);
+    opacity: 1;
+  }
+}
 
-  .carousel-container {
-    height: calc(100% - 96px);
-  }
-} */
+.personal-transition-enter-active {
+  animation: bounce2 0.15s ease-out;
+}
+
+.personal-transition-leave-active {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
 
 @media (min-width: 600px) {
+  body {
+    height: 800px;
+    min-height: 100vh;
+  }
+
   body:before,
   body:after {
     content: "";
@@ -260,7 +269,7 @@ body {
   }
 
   body:after {
-    background: #ededed;
+    background: linear-gradient(#ededed, #fff);
     z-index: -50;
     border-radius: 50px;
     transform: translate(-50%, 30px) scale(0.95);
@@ -279,19 +288,17 @@ body {
     transform: scale(0.8);
   }
 
-  /* #app:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 10px solid red;
-    top: -10px;
-    left: -10px;
-    overflow: hidden;
-  } */
-
   .carousel-container {
     height: calc(100% - 96px);
+  }
+
+  .input-box__form {
+    position: relative;
+    width: calc(100% + 17px);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -17px;
   }
 }
 </style>

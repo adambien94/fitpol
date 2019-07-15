@@ -1,23 +1,18 @@
 <template>
   <div id="chart">
-    <!-- <button v-on:click="japa = !japa">click</button> -->
     <span class="no-data-info" v-if="!storedData">{{blankInfo}}</span>
     <div class="scroll-container" v-if="storedData">
-      <!-- wykres waga -->
       <div class="chart-container">
         <span class="chart-label">Waga</span>
         <span class="chart-info">({{parseFloat(lostWeight).toFixed(1)}}kg)</span>
         <span class="chart-day">Dzień {{weight.length}}</span>
         <canvas id="my-chart-1"></canvas>
       </div>
-      <!-- wykres pas -->
       <div class="chart-container">
         <span class="chart-label">Pas</span>
         <span class="chart-info">({{parseFloat(lostWaist).toFixed(1)}}cm)</span>
         <canvas id="my-chart-3"></canvas>
-        <!-- <canvas id="my-chart-4"></canvas> -->
       </div>
-      <!-- pasek status -->
       <div class="score-container">
         <span class="chart-label">Dajesz z siebie</span>
         <span class="chart-info">{{parseFloat(testScore).toFixed(0)}}%</span>
@@ -43,7 +38,8 @@ export default {
       emots: [],
       happy: 0,
       sad: 0,
-      score: 0
+      score: 0,
+      period: 15
     };
   },
   methods: {
@@ -146,6 +142,11 @@ export default {
         }
       });
     },
+    updatePeriod() {
+      if (this.weight.length > 14) {
+        this.period = this.weight.length;
+      }
+    },
     updateDays() {
       this.days = [];
       for (let i = 0; i < this.period; i++) {
@@ -185,7 +186,7 @@ export default {
       let myWeight = [];
       for (let i = 0; i < this.$store.state.dataArr.length; i++) {
         if (this.dataArr[i].weight === "-") {
-          myWeight.push(myWeight[i - 1]); // WYMYŚŁ COŚ TUTAJ !!!!!!!!!!!!!!!!!!!
+          myWeight.push(myWeight[i - 1]);
         } else {
           myWeight.push(this.$store.state.dataArr[i].weight);
         }
@@ -261,13 +262,12 @@ export default {
     }
   },
   mounted() {
-    this.period = this.weight.length;
-
+    this.updatePeriod();
     this.updateDays();
   },
   updated() {
-    this.period = this.weight.length;
     if (this.storedData) {
+      this.updatePeriod();
       this.updateDays();
       this.updateCharts();
     }

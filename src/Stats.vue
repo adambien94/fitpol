@@ -11,32 +11,41 @@
           <span class="day__label">{{day}}</span>
           <span class="day__dots">...</span>
           <ul class="day__meals" v-on:click="showInput(index)">
-            <li class="meals__item" v-for="meal in meals[index]">- {{meal}}</li>
+            <div class="scroll-container">
+              <li class="meals__item" v-for="meal in meals[index]">- {{meal}}</li>
+            </div>
           </ul>
         </li>
       </ul>
     </div>
 
     <transition name="input-box-transition">
-      <div v-if="show" class="input-box">
+      <div v-show="show" class="input-box">
         <h2 class="input-box__title">Menu - {{days[dayIndex]}}</h2>
         <span></span>
-        <form id="my-form">
-          <div class="input-box__item" v-for="(mealInput, mealInputsIndex) in mealInputs">
+        <form id="my-form" class="input-box__form">
+          <div class="input-box__item" v-for="(mealInput, mealInputsIndex) in meals[dayIndex]">
             <input
               class="input-box__input"
               type="text"
               v-model="mealInputs[mealInputsIndex]"
               :placeholder="'posiłek ' + (mealInputsIndex + 1)"
+              @focus="mealEdit = true; setMealEditIndex(mealInputsIndex)"
+              @blur="mealEdit = false"
             />
           </div>
         </form>
+        <div class="input-box__meal-nav">
+          <button class="input-box__delete-meal" @click="deleteMeal()">-🗑️</button>
+          <button class="input-box__add-meal" @click="addMeal(dayIndex)">+🍲</button>
+        </div>
         <div class="input-box__buttons">
           <button class="input-box__btn" v-on:click="inputShowToggle">anuluj</button>
-          <button class="input-box__btn" v-on:click="addMeals">ok</button>
+          <button class="input-box__btn" v-on:click="addMenu(dayIndex); inputShowToggle()">ok</button>
         </div>
       </div>
     </transition>
+
     <transition name="blackout-transition">
       <div v-if="show" class="blackout"></div>
     </transition>
@@ -60,10 +69,40 @@ export default {
       ],
       activeDay: 0,
       dayIndex: 0,
-      mealInputs: ["", "", "", ""]
+      mealInputs: [],
+      mealEdit: false,
+      mealEditIndex: null
     };
   },
   methods: {
+    setMealEditIndex(mealInputsIndex) {
+      this.mealEditIndex = mealInputsIndex;
+    },
+    addMeal(dayIndex) {
+      this.meals[dayIndex].push("");
+      this.mealInputs = [];
+      for (let meal of this.meals) {
+        this.mealInputs.push("");
+      }
+      this.formScroll();
+    },
+    deleteMeal() {
+      this.meals[this.dayIndex].splice(this.mealEditIndex, 1);
+      this.updateMealInput(this.dayIndex);
+      this.addMenu(this.dayIndex);
+    },
+    disableDeleteMeal() {
+      const deleteBtn = document.querySelector(".input-box__delete-meal");
+      if (this.meals[this.dayIndex].length === 1) {
+        deleteBtn.disabled = true;
+      } else {
+        deleteBtn.disabled = false;
+      }
+    },
+    formScroll() {
+      const form = document.querySelector(".input-box__form");
+      form.scrollTop = form.getBoundingClientRect().height;
+    },
     showDayMenu(dayIndex) {
       this.activeDay = dayIndex;
     },
@@ -74,7 +113,7 @@ export default {
       this.dayIndex = dayIndex;
     },
     updateMealInput(dayIndex) {
-      for (let i = 0; i < this.mealInputs.length; i++) {
+      for (let i = 0; i < this.meals[dayIndex].length; i++) {
         if (this.meals[this.dayIndex][i] === "") {
           this.mealInputs[i] = "";
         } else {
@@ -87,15 +126,14 @@ export default {
       this.storeDayIndex(dayIndex);
       this.updateMealInput(dayIndex);
     },
-    addMeals() {
-      for (let i = 0; i < this.mealInputs.length; i++) {
+    addMenu(dayIndex) {
+      for (let i = 0; i < this.meals[dayIndex].length; i++) {
         if (this.mealInputs[i] !== "") {
           this.meals[this.dayIndex][i] = this.mealInputs[i];
         } else {
           this.meals[this.dayIndex][i] = "";
         }
       }
-      this.inputShowToggle();
       localStorage.setItem("mojeMenu", JSON.stringify(this.meals));
     },
     updateMeals1() {
@@ -109,6 +147,21 @@ export default {
     },
     meals() {
       return this.$store.state.meals;
+    }
+  },
+  watch: {
+    mealEdit() {
+      const mealNav = document.querySelector(".input-box__meal-nav");
+      if (this.mealEdit) {
+        setTimeout(() => {
+          mealNav.style.transform = "translateX(0)";
+        }, 100);
+      } else {
+        setTimeout(() => {
+          mealNav.style.transform = "translateX(-50%)";
+        }, 100);
+      }
+      this.disableDeleteMeal();
     }
   },
   created() {
@@ -142,12 +195,12 @@ export default {
 }
 
 .day {
+  overflow: hidden;
   padding: 14px 0;
+  transition: height 0.2s;
   border-bottom: 1px solid rgba(0, 0, 0, 0.03);
   list-style: none;
-  transition: 0.2s;
   height: 40px;
-  overflow: hidden;
 }
 
 .day__label {
@@ -164,27 +217,23 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   font-size: 15px;
-  transition: 0.1s;
+  transition: 0.2s;
 }
 
 .day--opened {
   height: 165px;
-  /* background: #fffbe5; */
 }
 
 .day--opened .day__dots {
   color: transparent;
 }
 
-.day--opened .day__label {
-  color: #000;
-}
-
 .day__meals {
-  margin: 15px 30px;
+  margin: 15px 0px 5px 30px;
   transition: 0.2s;
   position: relative;
   top: 0;
+  height: 138px;
 }
 
 .day--opened .day__meals {
@@ -218,12 +267,13 @@ export default {
   font-weight: bold;
   line-height: 28px;
   padding: 14px;
-  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
 }
 
-.input-box form {
-  padding: 24px 0 14px 0;
+.input-box__form {
+  padding: 24px 0 0px 0;
   height: 200px;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 .input-box__item {
@@ -247,6 +297,46 @@ export default {
   color: black;
 }
 
+.input-box__meal-nav {
+  margin: 10px 0 16px 0;
+  display: flex;
+  justify-content: space-around;
+  width: 200%;
+  transform: translateX(-50%);
+  transition: transform 0.35s ease-out;
+}
+
+.input-box__delete-meal,
+.input-box__add-meal {
+  display: inline-block;
+  border: none;
+  color: black;
+  height: 42px;
+  padding: 0 4px;
+  border-radius: 2px;
+  background: transparent;
+  font-weight: bold;
+  outline: none;
+  text-align: center;
+  font-size: 24px;
+  line-height: 24px;
+  transition: 0.1s;
+  border: 1px solid transparent;
+}
+
+.input-box__add-meal:active {
+  border: 1px solid #388697;
+}
+
+.input-box__delete-meal:active {
+  border: 1px solid #d81159;
+}
+
+.input-box__delete-meal:disabled,
+.input-box__add-meal:disabled {
+  opacity: 0.3;
+}
+
 .input-box__label {
   font-size: 15px;
   line-height: 36px;
@@ -255,9 +345,7 @@ export default {
 
 .input-box__buttons {
   display: flex;
-  /* background: #ededed; */
   padding: 3px;
-  margin-top: 18px;
 }
 
 .input-box__btn {

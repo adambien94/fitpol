@@ -158,9 +158,6 @@ export default {
     },
     listAnimation() {
       let list = document.querySelector(".data");
-      // let listItemHeight = document
-      //   .querySelector(".data__item")
-      //   .getBoundingClientRect().height;
       list.style.transition = "0";
       list.style.transform = "translateY(-48px)";
       setTimeout(function() {
