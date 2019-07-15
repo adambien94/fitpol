@@ -84,7 +84,9 @@ export default {
       for (let meal of this.meals) {
         this.mealInputs.push("");
       }
-      this.formScroll();
+      setTimeout(() => {
+        this.formScroll();
+      }, 50);
     },
     deleteMeal() {
       this.meals[this.dayIndex].splice(this.mealEditIndex, 1);
@@ -101,7 +103,8 @@ export default {
     },
     formScroll() {
       const form = document.querySelector(".input-box__form");
-      form.scrollTop = form.getBoundingClientRect().height;
+      console.log(form.scrollHeight);
+      form.scrollTop = form.scrollHeight;
     },
     showDayMenu(dayIndex) {
       this.activeDay = dayIndex;

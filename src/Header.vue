@@ -21,11 +21,8 @@
     <transition name="option-window-transition">
       <div class="option-window" v-show="optionShow">
         <ul class="option-window__list">
-          <li class="option-window__item" @click="resetData()">Reset</li>
-          <li class="option-window__item" @click="defaultData()">Przykładowe dane</li>
-          <li class="option-window__item">Info</li>
-          <li class="option-window__item">Wyloguj</li>
-          <li class="option-window__item">Usuń konto</li>
+          <li class="option-window__item" @click="resetData()">🔄 Reset</li>
+          <li class="option-window__item" @click="defaultData()">👨 Przykładowe dane</li>
         </ul>
       </div>
     </transition>
@@ -180,12 +177,6 @@ export default {
   width: auto;
 }
 
-.option-window__item:nth-child(3),
-.option-window__item:nth-child(4),
-.option-window__item:nth-child(5) {
-  opacity: 0.4;
-}
-
 .transparent-cover {
   position: absolute;
   z-index: 40;
@@ -197,7 +188,7 @@ export default {
 
 @keyframes bounce {
   0% {
-    transform: translate(55px, -75px) scale(0.7, 0.3);
+    transform: translate(38px, -50px) scale(0.65, 0.1);
     opacity: 0;
   }
   100% {
