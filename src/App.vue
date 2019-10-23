@@ -140,18 +140,24 @@ export default {
 }
 body {
   height: 100vh;
-  background: linear-gradient(#fff, rgba(0, 0, 0, 0.1));
+  background: linear-gradient(#fff, rgba(0, 0, 0, 0.175));
   position: relative;
+  font-family: "Nunito", sans-serif;
 }
 
 #app {
   max-width: 450px;
   margin: 0px auto;
-  font-family: "Roboto", serif;
+  /* font-family: "Roboto", serif; */
   position: relative;
   color: #05161c;
   overflow: hidden;
   height: 100vh;
+}
+
+button,
+input {
+  font-family: "Nunito", sans-serif;
 }
 
 .ham-container {
@@ -269,7 +275,7 @@ body {
   }
 
   body:after {
-    background: linear-gradient(#ededed, #fff);
+    background: linear-gradient(#f2f3f4, #fff);
     z-index: -50;
     border-radius: 50px;
     transform: translate(-50%, 30px) scale(0.95);

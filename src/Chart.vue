@@ -306,7 +306,7 @@ export default {
 
 .chart-label {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   color: black;
   padding: 0px 0px 0px 15px;
   line-height: 34px;
@@ -321,7 +321,7 @@ export default {
 .chart-day {
   font-size: 15px;
   margin-top: 4px;
-  font-weight: 500;
+  font-weight: 600;
   float: right;
   padding-top: 5px;
   padding-right: 15px;

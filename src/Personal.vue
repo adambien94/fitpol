@@ -16,9 +16,11 @@
         </div>
         <div class="input-box__item">
           <label class="input-box__label" for>Płeć</label>
-          <input type="radio" name="gender" value="male" id="maleId" /> Mężczyzna
+          <input type="radio" name="gender" id="maleId" value="male" />
+          <label for="maleId" class="input-box__radio">Mężczyzna</label>
           <br />
-          <input type="radio" name="gender" value="female" id="femaleId" /> Kobieta
+          <input type="radio" name="gender" id="femaleId" value="female" />
+          <label for="femaleId" class="input-box__radio">Kobieta</label>
           <br />
         </div>
         <div class="input-box__item" :on="click">
@@ -166,8 +168,7 @@ export default {
   padding: 0;
   font-size: 24px;
   line-height: 24px;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-weight: 600;
   top: 14px;
   padding: 0 14px;
 }
@@ -178,7 +179,6 @@ export default {
 
 .input-box__item {
   color: rgba(0, 0, 0, 0.5);
-  /* font-weight: 500; */
 }
 
 .input-box__input {
@@ -209,11 +209,11 @@ export default {
 .input-box__label {
   color: #000;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 600;
   display: block;
   line-height: 28px;
   padding: 12px 0 0 20px;
-  background: rgba(0, 0, 0, 0.05);
+  background: #f4f6f7;
 }
 
 .input-box__submit-btn {
@@ -232,7 +232,46 @@ export default {
 }
 
 input[type="radio"] {
-  margin: 17px 20px;
+  display: none;
+}
+
+.input-box__radio {
+  font-size: 17px;
+  line-height: 48px;
+  display: inline-block;
+  margin: 0 20px;
+  transform: translateX(30px);
+}
+
+.input-box__radio:before,
+.input-box__radio:after {
+  content: "";
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  width: 17px;
+  height: 17px;
+  border-radius: 20px;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-box__radio:before {
+  border: 4.5px solid #fff;
+  background: transparent;
+}
+
+.input-box__radio:after {
+  border: 2px solid #999999;
+}
+
+input[type="radio"]:checked + .input-box__radio:before {
+  background: #388697;
+}
+
+input[type="radio"]:checked + .input-box__radio:after {
+  border-color: #388697;
 }
 
 .bar {
@@ -242,13 +281,12 @@ input[type="radio"] {
 }
 
 .bar__back-arrow {
-  /* background: url("./img/keyboard-left-arrow-button.png"); */
-  /* background-size: cover; */
   height: 16px;
   width: 16px;
   box-sizing: border-box;
   border-top: 3px solid black;
   border-left: 3px solid black;
+  border-radius: 3px;
   margin: 0 10px 0 20px;
   position: relative;
   transform: rotate(-45deg);

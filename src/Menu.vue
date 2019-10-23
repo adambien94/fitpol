@@ -31,10 +31,8 @@ export default {
   methods: {
     slideHam2() {
       this.$emit("slideHam2");
-      const yolo = document.getElementById("heh");
     },
     slideHam() {
-      console.log("hehe");
       this.$emit("slideHam");
     }
   }
@@ -53,7 +51,7 @@ export default {
 
 .menu__list {
   width: 100%;
-  background: #ededed;
+  background: #f2f3f4;
   padding: 25px 0 25px 0;
 }
 
@@ -71,7 +69,7 @@ export default {
 
 .menu__link {
   font-size: 19px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000;
   text-decoration: none;
 }

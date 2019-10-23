@@ -189,19 +189,15 @@ export default {
   display: block;
   text-align: center;
   color: #000;
-  /* font-size: 17px; */
 }
 
 .info__span {
   color: black;
   text-transform: uppercase;
-  /* color: #d81159; */
-  /* font-size: 20px; */
 }
 
 .calculator__item {
   padding: 12px 0;
-  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
 }
 
 .calculator__label,
@@ -211,15 +207,11 @@ export default {
 }
 
 .calculator__label {
-  font-weight: 500;
-  /* background: rgba(0, 0, 0, 0.05); */
-  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  font-weight: 600;
   line-height: 28px;
-  /* padding: 12px 0 0 15px; */
 }
 
 .calculator__span {
-  /* line-height: 48px; */
   color: #d81159;
   font-size: 19px;
   padding-top: 0px;

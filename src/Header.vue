@@ -3,7 +3,7 @@
     <nav class="menu">
       <div class="top-nav">
         <div class="top-nav__ham" v-on:click="slideHam"></div>
-        <span class="top-nav__title">FitpolApp</span>
+        <span class="top-nav__title">Fitpol</span>
         <div class="top-nav__search"></div>
         <div class="top-nav__options" @click="optionShow = !optionShow"></div>
       </div>
@@ -21,8 +21,8 @@
     <transition name="option-window-transition">
       <div class="option-window" v-show="optionShow">
         <ul class="option-window__list">
-          <li class="option-window__item" @click="resetData()">🔄 Reset</li>
-          <li class="option-window__item" @click="defaultData()">👨 Przykładowe dane</li>
+          <li class="option-window__item" @click="resetData()">Reset</li>
+          <li class="option-window__item" @click="defaultData()">Przykładowe dane</li>
         </ul>
       </div>
     </transition>
@@ -69,7 +69,7 @@ export default {
   width: 100%;
   z-index: 0;
   width: 100%;
-  background: #ededed;
+  background: #f2f3f4;
 }
 
 .menu {
@@ -78,19 +78,18 @@ export default {
 
 .top-nav {
   padding: 10px 15px 6px 15px;
-  background: #ededed;
+  background: #f2f3f4;
   color: black;
   display: flex;
 }
 
 .top-nav__title {
   font-size: 22px;
-  font-weight: bold;
   line-height: 32px;
   margin-left: 15px;
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .top-nav__ham,
@@ -104,8 +103,9 @@ export default {
 }
 
 .top-nav__ham {
-  background: url("./img/baseline_menu_black_24dp.png");
-  background-size: cover;
+  background: url("./img/ham.png");
+  background-size: 125%;
+  background-position-y: -1px;
 }
 
 .top-nav__search {
@@ -115,14 +115,15 @@ export default {
 }
 
 .top-nav__options {
-  background: url("./img/baseline_more_vert_black_24dp.png");
-  background-size: cover;
+  background: url("./img/baseline_more_vert_black_24dp.png") no-repeat;
+  background-size: 88%;
+  background-position: center;
   margin-left: 10px;
 }
 
 .bottom-nav {
   display: flex;
-  background: #ededed;
+  background: #f2f3f4;
 }
 
 .bottom-nav__item {
@@ -134,7 +135,7 @@ export default {
 
 .bottom-nav__link {
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   color: black;
   text-transform: capitalize;
   display: inline-block;
@@ -149,7 +150,7 @@ export default {
   position: absolute;
   height: 48px;
   width: 25%;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.065);
   bottom: 0px;
   transition: transform 0.225s;
 }
@@ -172,7 +173,7 @@ export default {
 
 .option-window__item {
   font-size: 16px;
-  padding: 10px 0;
+  padding: 10px 5px;
   list-style: none;
   width: auto;
 }

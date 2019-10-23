@@ -206,7 +206,7 @@ export default {
   display: block;
   font-size: 15px;
   padding-left: 15px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: capitalize;
 }
 
@@ -263,7 +263,7 @@ export default {
 .input-box__title {
   color: black;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 28px;
   padding: 14px;
 }

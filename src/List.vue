@@ -242,9 +242,7 @@ export default {
 
 .data__item {
   font-size: 15px;
-  font-weight: 400;
   line-height: 48px;
-  /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
   cursor: pointer;
   position: relative;
 }
@@ -298,15 +296,15 @@ export default {
 }
 
 .data__item .date {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .data__item .note {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .data__item .weight {
-  font-weight: 500;
+  font-weight: 600;
   color: #d81159;
   /* color: #000; */
 }
@@ -352,7 +350,7 @@ export default {
 .input-box__title {
   color: black;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 28px;
   padding: 14px;
   /* border-bottom: 1px solid rgb(0, 0, 0, 0.03); */
@@ -364,7 +362,7 @@ export default {
 
 .input-box__item {
   margin-bottom: 12px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .input-box__input {
@@ -399,7 +397,7 @@ export default {
 .input-box__label {
   font-size: 20px;
   line-height: 36px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .input-box__buttons {
